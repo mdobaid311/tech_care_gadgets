@@ -1,12 +1,12 @@
 import React from "react";
-import "./ProductsGrid.scss";
-import shirt1 from "../../../assets/shirt-1.jpg";
-import shirt2 from "../../../assets/shirt-2.jpg";
-import shirt3 from "../../../assets/shirt-3.jpg";
-import Product from "../Product/Product";
+import "./ProductsRibbon.scss";
 
+import shirt1 from "../../../../assets/shirt-1.jpg";
+import shirt2 from "../../../../assets/shirt-2.jpg";
+import shirt3 from "../../../../assets/shirt-3.jpg";
+import Product from "../../Product/Product";
 
-const ProductsGrid = () => {
+const ProductsRibbon = ({title}) => {
   const products = [
     {
       id: 1,
@@ -65,17 +65,16 @@ const ProductsGrid = () => {
       image: shirt1,
     },
   ];
-
   return (
-    <div className="products__grid">
+    <div className="products__ribbon">
+      <h1>{title}</h1>
       <div className="products">
         {products.map((product) => {
           return <Product product={product} key={product.id} />;
         })}
       </div>
-      <button>Load More</button>
     </div>
   );
 };
 
-export default ProductsGrid;
+export default ProductsRibbon;

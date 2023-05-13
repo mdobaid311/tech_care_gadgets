@@ -1,0 +1,23 @@
+.products__ribbon {
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  padding: 20px;
+  margin: 10px;
+  overflow: hidden;
+
+  h1 {
+    margin-left: 20px;
+  }
+
+  .products {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
