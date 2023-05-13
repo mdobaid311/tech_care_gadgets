@@ -2,7 +2,7 @@ import React from "react";
 import "./BrandLogoRibbon.scss";
 
 import image1 from "../../../../assets/brand-logos/Burberry.png";
-import image2 from "../../../../assets/brand-logos/Chanel.png";
+import image2 from "../../../../assets/brand-logos/chanel.png";
 import image3 from "../../../../assets/brand-logos/Dior.png";
 import image4 from "../../../../assets/brand-logos/Gucci.png";
 import image5 from "../../../../assets/brand-logos/zara.png";
