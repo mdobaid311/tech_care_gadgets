@@ -17,7 +17,7 @@ const BrandLogoRibbon = () => {
     brand-logo-ribbon
   "
     >
-      <h1>Choose your brand</h1>
+      <h1 >Choose your brand</h1>
       <div className="brands">
         {logo.map((image, index) => {
           return (
