@@ -3,8 +3,8 @@ import "./BrandLogoRibbon.scss";
 
 import image1 from "../../../../assets/brand-logos/Burberry.png";
 import image2 from "../../../../assets/brand-logos/chanel.png";
-import image3 from "../../../../assets/brand-logos/Dior.png";
-import image4 from "../../../../assets/brand-logos/Gucci.png";
+import image3 from "../../../../assets/brand-logos/dior.png";
+import image4 from "../../../../assets/brand-logos/gucci.png";
 import image5 from "../../../../assets/brand-logos/zara.png";
 import image6 from "../../../../assets/brand-logos/armani.png";
 
