@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import AppLayout from "./components/Layouts/AppLayout";
 import Home from "./pages/Home";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route>
           <Route path="/" element={<AppLayout />}>
             <Route path="home" element={<Home />} />
+            <Route path="shop" element={<Shop />} />
           </Route>
         </Route>
         <Route path="/" element={<AuthLayout />}>
