@@ -16,6 +16,9 @@ module.exports = {
     browser: true,
     es2020: true,
   },
+  globals: {
+    process: true,
+  },
   rules: {
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",

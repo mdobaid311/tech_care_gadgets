@@ -38,10 +38,10 @@ const Navbar = () => {
       <div className="navbar__right">
         <ul className="navbar__menu">
           <li className="navbar__menu-item">
-            <Link to="#">Sign in</Link>
+            <Link to="/login">Sign in</Link>
           </li>
           <li className="navbar__menu-item">
-            <Link to="#">Create an account</Link>
+            <Link to="/signup">Create an account</Link>
           </li>
         </ul>
         <Link to="#">
@@ -50,10 +50,10 @@ const Navbar = () => {
         <Link to="#">
           <BiShoppingBag className="icon" />
         </Link>
-        <div className="navbar__shopping_cart">
+        <Link to="/cart" className="navbar__shopping_cart">
           <span>Shopping Cart</span>
           <span>0.00 USD</span>
-        </div>
+        </Link >
       </div>
     </div>
   );

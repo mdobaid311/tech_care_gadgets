@@ -5,7 +5,14 @@ import Footer from "../common/Footer/Footer";
 
 const AppLayout = () => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <Navbar />
       <Outlet />
       <Footer />
