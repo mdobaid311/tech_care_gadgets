@@ -11,6 +11,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout/Checkout";
 import { client } from "./sanity/client";
 import React, { useState, useEffect } from "react";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
 
@@ -20,11 +21,12 @@ function App() {
       <Routes>
         <Route>
           <Route path="/" element={<AppLayout />}>
-            <Route path="home" element={<Home />} />
+            <Route path="" element={<Home />} />
             <Route path="shop" element={<Shop />} />
             <Route path="shop/:id" element={<DetailView />} />
             <Route path="cart" element={<ShoppingCart />} />
             <Route path="cart" element={<Checkout />} />
+            <Route path="contact" element={<Contact />} />
           </Route>
         </Route>
         <Route path="/" element={<AuthLayout />}>

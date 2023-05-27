@@ -5,7 +5,7 @@ import ProductsGrid from "../../ProductsGrid/ProductsGrid";
 const ProductsSection = () => {
   return (
     <div className="products__section">
-      <div className="choose__filter__container">
+      {/* <div className="choose__filter__container">
         <h3>Shop Some Wear:</h3>
         <div className="filter__container">
           <input type="checkbox" />
@@ -31,7 +31,7 @@ const ProductsSection = () => {
           <input type="checkbox" />
           <span>Trending</span>
         </div>
-      </div>
+      </div> */}
       <ProductsGrid />
     </div>
   );

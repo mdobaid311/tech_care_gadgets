@@ -1,7 +1,8 @@
 import React from "react";
 import "./Hero.scss";
-import image1 from "../../../../assets/shirt-1.jpg";
-import image2 from "../../../../assets/shirt-2.jpg";
+import image1 from "../../../../assets/hero-2.jpg";
+import image2 from "../../../../assets/hero-1.jpg";
+import { Link } from "react-router-dom";
 
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
@@ -12,9 +13,9 @@ const Hero = () => {
       <div className="hero__content">
         <div className="content__description">
           <h1>
-            SUMMER SALE GET <span>30% OFF</span> ON ALL DRESS.
+            SUMMER SALE GET <span>30% OFF</span> ON ALL PRODUCTS.
           </h1>
-          <button>SHOP NOW</button>
+          <Link to="/shop">SHOP NOW</Link>
         </div>
         <div className="content__images">
           <img src={image1} alt="" />

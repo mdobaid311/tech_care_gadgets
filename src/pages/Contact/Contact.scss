@@ -1,0 +1,45 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  h1 {
+    text-align: center;
+  }
+
+  .contact__container {
+    display: flex;
+    justify-content: space-evenly;
+
+    .contact__container__left {
+      display: flex;
+      flex-direction: column;
+      
+      .contact {
+        display: flex;
+        width: 100%;
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px;
+          border: 1px solid black;
+          border-radius: 50%;
+          height: 40px;
+          width: 40px;
+
+          i {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .contact__container__right {
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
