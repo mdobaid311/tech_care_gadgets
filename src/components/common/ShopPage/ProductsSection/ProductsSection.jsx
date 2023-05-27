@@ -21,15 +21,16 @@ const ProductsSection = () => {
       })
       .catch(console.error);
 
-    client
-      .fetch(
-        `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
-      )
-      .then((products) => {
-        setProducts(products);
-      })
-      .catch(console.error);
-  }, []);
+    if (products.length === 0) {
+      if (categories.length > 0) {
+        filterCategory(categories);
+      } else if (brandFilter.length > 0) {
+        filterBrand(brandFilter);
+      } else {
+        getAllProducts();
+      }
+    }
+  }, [products, categories, brandFilter]);
 
   const filterCategory = (categories) => {
     console.log(
@@ -67,6 +68,17 @@ const ProductsSection = () => {
       .then((result) => {
         setProducts(result);
         console.log(result);
+      })
+      .catch(console.error);
+  };
+
+  const getAllProducts = async () => {
+    await client
+      .fetch(
+        `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
+      )
+      .then((products) => {
+        setProducts(products);
       })
       .catch(console.error);
   };

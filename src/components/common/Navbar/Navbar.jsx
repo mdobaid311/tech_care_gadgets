@@ -4,8 +4,15 @@ import logo from "../../../assets/tech-care-gadgets-logo.png";
 import { Link } from "react-router-dom";
 import { BiSearch, BiShoppingBag } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const user = useSelector((state) => state.user.user);
+  const cart = useSelector((state) => state.cart);
+
+  const cartTotal = cart.items.reduce((acc, item) => acc + item.price, 0);
+
+
   return (
     <div className="navbar">
       <div className="navbar__left">
@@ -19,7 +26,7 @@ const Navbar = () => {
           <li className="navbar__menu-item">
             <Link to="/shop">Shop</Link>
           </li>
-    <li className="navbar__menu-item">
+          <li className="navbar__menu-item">
             <Link to="/contact">Contact Us</Link>
           </li>
         </ul>
@@ -31,12 +38,20 @@ const Navbar = () => {
       </div>
       <div className="navbar__right">
         <ul className="navbar__menu">
-          <li className="navbar__menu-item">
-            <Link to="/login">Sign in</Link>
-          </li>
-          <li className="navbar__menu-item">
-            <Link to="/signup">Create an account</Link>
-          </li>
+          {!user ? (
+            <>
+              <li className="navbar__menu-item">
+                <Link to="/login">Sign in</Link>
+              </li>
+              <li className="navbar__menu-item">
+                <Link to="/signup">Create an account</Link>
+              </li>
+            </>
+          ) : (
+            <li className="navbar__menu-item">
+              <Link to="/">{user.name}</Link>
+            </li>
+          )}
         </ul>
         <Link to="#">
           <AiOutlineHeart className="icon" />
@@ -46,7 +61,7 @@ const Navbar = () => {
         </Link>
         <Link to="/cart" className="navbar__shopping_cart">
           <span>Shopping Cart</span>
-          <span>0.00 USD</span>
+          <span>{cartTotal} USD</span>
         </Link>
       </div>
     </div>

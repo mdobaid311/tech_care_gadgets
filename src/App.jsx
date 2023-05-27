@@ -12,10 +12,10 @@ import Checkout from "./pages/Checkout/Checkout";
 import { client } from "./sanity/client";
 import React, { useState, useEffect } from "react";
 import Contact from "./pages/Contact/Contact";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
-
-
+ 
   return (
     <BrowserRouter>
       <Routes>
