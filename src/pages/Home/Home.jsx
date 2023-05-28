@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Hero from "../components/common/HomePage/Hero/Hero";
-import BrandLogoRibbon from "../components/common/HomePage/BrandLogoRibbon/BrandLogoRibbon";
-import OffersGrid from "../components/common/HomePage/OffersGrid/OffersGrid";
-import ProductsSection from "../components/common/HomePage/ProductsSection/ProductsSection";
-import ProductsRibbon from "../components/common/HomePage/ProductsRibbon/ProductsRibbon";
-import { client } from "../sanity/client";
+import Hero from "../../components/common/HomePage/Hero/Hero";
+import BrandLogoRibbon from "../../components/common/HomePage/BrandLogoRibbon/BrandLogoRibbon";
+import OffersGrid from "../../components/common/HomePage/OffersGrid/OffersGrid";
+import ProductsSection from "../../components/common/HomePage/ProductsSection/ProductsSection";
+import ProductsRibbon from "../../components/common/HomePage/ProductsRibbon/ProductsRibbon";
+import { client } from "../../sanity/client";
 import { useSelector } from "react-redux";
 
 const Home = () => {

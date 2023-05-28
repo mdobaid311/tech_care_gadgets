@@ -2,39 +2,31 @@ import React from "react";
 import "./Product.scss";
 import { AiOutlineHeart } from "react-icons/ai";
 import { client, urlFor } from "../../../sanity/client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   const onAddToCart = async (product) => {
-    const userEmail = "mdobaid311@gmail.com"; // Replace with the user's email
-
-    const userResponse = await client.fetch(
-      `*[_type == "user" && email == '${userEmail}']{_id, cart}`
-    );
-    const user = userResponse[0];
-
     const newProductReference = {
       _key: uuidv4(),
       _type: "reference",
       _ref: product?._id,
     };
 
-    const updatedCart = user.cart.map((item) => {
-      if (!item._key) {
-        return { ...item, _key: uuidv4() };
-      }
-      return item;
-    });
-
-    const updatedCartWithNewProduct = [...updatedCart, newProductReference];
-
+    console.log(user)
     await client
-      .patch(user._id)
-      .set({ cart: updatedCartWithNewProduct })
+      .patch(user.user._id)
+      .setIfMissing({ cart: [] }) // Ensure cart field exists if it's missing
+      .insert("after", "cart[-1]", [newProductReference]) // Insert the new product at the end of the cart array
       .commit();
+
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: product,
+    });
     console.log("Product added to cart successfully!");
   };
 

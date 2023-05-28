@@ -1,5 +1,5 @@
 import React from "react";
-import ProductsSection from "../components/common/ShopPage/ProductsSection/ProductsSection";
+import ProductsSection from "../../components/common/ShopPage/ProductsSection/ProductsSection";
 // import AdBanner from "../components/common/ShopPage/AdBanner/AdBanner";
  
 const Shop = () => {

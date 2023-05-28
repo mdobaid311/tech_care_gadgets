@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import shirt1 from "../assets/shirt-1.jpg";
-import shirt2 from "../assets/shirt-2.jpg";
-import shirt3 from "../assets/shirt-3.jpg";
 import "./DetailView.scss";
 import { useParams } from "react-router-dom";
-import { client } from "../sanity/client";
+import { client } from "../../sanity/client";
+ 
 
 const DetailView = () => {
   const { id } = useParams();

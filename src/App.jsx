@@ -1,19 +1,21 @@
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AuthLayout from "./components/Layouts/AuthLayout";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import AppLayout from "./components/Layouts/AppLayout";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
-import DetailView from "./pages/DetailView";
-import ShoppingCart from "./pages/ShoppingCart";
-import Checkout from "./pages/Checkout/Checkout";
-import { client } from "./sanity/client";
 import React, { useState, useEffect } from "react";
-import Contact from "./pages/Contact/Contact";
+import { client } from "./sanity/client";
 import { useSelector, useDispatch } from "react-redux";
 
+import AuthLayout from "./components/Layouts/AuthLayout";
+import AppLayout from "./components/Layouts/AppLayout";
+ 
+import Contact from "./pages/Contact/Contact";
+import Shop from "./pages/Shop/Shop";
+import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
+import Checkout from "./pages/Checkout/Checkout";
+import Home from "./pages/Home/Home";
+import Signup from "./pages/Signup/Signup";
+import Login from "./pages/Login/Login";  
+import DetailView from "./pages/DetailView/DetailView";
+ 
 function App() {
  
   return (
