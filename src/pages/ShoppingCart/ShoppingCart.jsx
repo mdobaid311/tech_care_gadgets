@@ -36,8 +36,8 @@ const ShoppingCart = () => {
       type: "REMOVE_FROM_CART",
       payload: productReference,
     });
-    setCartItems(cartItems.filter((item) => item._id !== product._id));
-    console.log(cartItems)
+    setCartItems((prev) => prev.filter((item) => item._id !== product._id));
+    console.log(cartItems);
     console.log("Product removed from cart successfully!");
   };
 
