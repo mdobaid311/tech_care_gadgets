@@ -7,11 +7,9 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user.user);
-  const cart = useSelector((state) => state.cart);
+  const user = true;
 
-  const cartTotal = cart.items.reduce((acc, item) => acc + item.price, 0);
-
+  const cartTotal = 0;
 
   return (
     <div className="navbar">

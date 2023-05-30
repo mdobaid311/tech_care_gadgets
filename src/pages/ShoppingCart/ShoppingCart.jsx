@@ -7,9 +7,8 @@ import { client } from "../../sanity/client";
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+
+  
 
   useEffect(() => {
     client
@@ -18,7 +17,6 @@ const ShoppingCart = () => {
       )
       .then((data) => {
         setCartItems(data[0].cart);
-        // console.log(data[0].cart);
       });
   }, [cartItems]);
 
@@ -28,14 +26,11 @@ const ShoppingCart = () => {
       _type: "reference",
       _ref: product._id,
     };
-    await client
-      .patch(user.user._id)
-      .unset([`cart[_ref=="${product._id}"]`])
-      .commit();
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: productReference,
-    });
+    // await client
+    //   .patch(user.user._id)
+    //   .unset([`cart[_ref=="${product._id}"]`])
+    //   .commit();
+
     setCartItems((prev) => prev.filter((item) => item._id !== product._id));
     console.log(cartItems);
     console.log("Product removed from cart successfully!");
