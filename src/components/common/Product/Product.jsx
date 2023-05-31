@@ -6,22 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 import { useStateContext } from "../../../context/stateContext";
 
 const Product = ({ product }) => {
+  const { onAdd } = useStateContext();
 
   const onAddToCart = async (product) => {
-    const newProductReference = {
-      _key: uuidv4(),
-      _type: "reference",
-      _ref: product?._id,
-    };
-
-    // console.log(user);
-    // await client
-    //   .patch(user.user._id)
-    //   .setIfMissing({ cart: [] }) // Ensure cart field exists if it's missing
-    //   .insert("after", "cart[-1]", [newProductReference]) // Insert the new product at the end of the cart array
-    //   .commit();
-
-    console.log("Product added to cart successfully!");
+    onAdd(product, 1);
   };
 
   return (

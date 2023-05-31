@@ -122,3 +122,17 @@
     }
   }
 }
+
+.shop {
+  position: relative;
+
+  .menu__box {
+    display: none;
+  }
+
+  // hover on shop to show menu_box
+
+  &:hover {
+    .menu__box {display: block;}
+  }
+}

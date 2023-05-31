@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { BiSearch, BiShoppingBag } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useStateContext } from "../../../context/stateContext";
+import Menu from "../Menu/Menu";
 
 const Navbar = () => {
-  const user = true;
-
-  const cartTotal = 0;
+  const { user, totalPrice: cartTotal } = useStateContext();
 
   return (
     <div className="navbar">
@@ -21,8 +21,11 @@ const Navbar = () => {
           <li className="navbar__menu-item">
             <Link to="/ ">Home</Link>
           </li>
-          <li className="navbar__menu-item">
+          <li className="navbar__menu-item shop">
             <Link to="/shop">Shop</Link>
+            <div className="menu__box">
+              <Menu />
+            </div>
           </li>
           <li className="navbar__menu-item">
             <Link to="/contact">Contact Us</Link>
