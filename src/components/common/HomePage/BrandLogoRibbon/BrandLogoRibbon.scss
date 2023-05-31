@@ -12,6 +12,12 @@
     z-index: 10;
     background-color: white;
     padding: 0 50px;
+
+    @media screen and (max-width: 800px) {
+      font-size: 12px;
+      top: 0px;
+      z-index: 0;
+    }
   }
 
   .brands {
@@ -19,12 +25,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid #C4C4C4;
-    
+    border: 2px solid #c4c4c4;
+
     .brand-logo {
       width: 200px;
       padding: 0 20px;
       object-fit: contain;
+      @media screen and (max-width: 800px) {
+        width: 50px;
+        padding: 0 5px;
+      }
     }
   }
 }

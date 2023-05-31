@@ -26,11 +26,7 @@ const ProductsRibbon = ({ title }) => {
       <h1>{title}</h1>
       <div className="products">
         {products?.map((product) => {
-          return (
-            <Link key={product._id} to={`/shop/${product._id}`}>
-              <Product product={product} key={product.id} />
-            </Link>
-          );
+          return <Product product={product} key={product._id} />;
         })}
       </div>
     </div>

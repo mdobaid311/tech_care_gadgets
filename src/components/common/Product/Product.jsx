@@ -4,6 +4,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { client, urlFor } from "../../../sanity/client";
 import { v4 as uuidv4 } from "uuid";
 import { useStateContext } from "../../../context/stateContext";
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
   const { onAdd } = useStateContext();
@@ -13,7 +14,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className="product" key={product.id}>
+    <Link to={`/shop/${product._id}`} className="product" key={product._id}>
       <div className="product__image">
         {product?.imageUrl[0] && (
           <img
@@ -41,7 +42,7 @@ const Product = ({ product }) => {
         <div className="product__name"> {product?.name} </div>
         <div className="product__price"> {product?.price}USD</div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -7,19 +7,23 @@
   text-transform: uppercase;
   font-size: 12px;
 
-
-
   .footer__container {
     display: flex;
     justify-content: space-evenly;
     // align-items: center;
 
-    .footer__logo{
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer__logo {
       display: flex;
       align-items: center;
       img {
         width: 100px;
-        margin-bottom: 10px;
+        margin-top: 10px;
       }
     }
 
@@ -27,6 +31,9 @@
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 10px;
+      @media screen and (max-width: 800px) {
+        font-size: 10px;
+      }
     }
 
     ul {
@@ -40,7 +47,6 @@
         // align-items: center;
         flex-direction: column;
 
-
         span {
           font-weight: bold;
         }
@@ -51,15 +57,23 @@
       }
     }
 
-    .footer__joinus {
+    .footer__contact {
       display: flex;
       flex-direction: column;
 
-      input {
+      @media screen and (max-width: 800px) {
+        width: 100%;
+      }
+      h2 {
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      input,
+      textarea {
         align-self: start;
         margin-top: 10px;
         padding: 0px 5px;
-        border: 1px solid white;
+        border: .2px solid white;
         background-color: transparent;
         outline: none;
         font-weight: bold;
@@ -73,7 +87,7 @@
         align-self: start;
         margin-top: 10px;
         padding: 0px 5px;
-        border: 2px solid white;
+        border: .2px solid white;
         background-color: transparent;
         outline: none;
         font-weight: bold;
@@ -81,6 +95,12 @@
         transition: all 0.1s ease-in-out;
         color: white;
         width: 100%;
+
+        @media screen and (max-width: 800px) {
+          font-size: 10px;
+          margin-top: 5px;
+        }
+
         &:hover {
           background-color: white;
           color: black;
@@ -91,5 +111,14 @@
   a {
     text-decoration: none;
     color: #fff;
+  }
+}
+
+.footer__features,
+.footer__menu,
+.footer__contactus,
+.footer__followus {
+  @media screen and (max-width: 800px) {
+    display: none;
   }
 }

@@ -84,7 +84,7 @@ const ProductsSection = () => {
   };
 
   return (
-    <div className="products__section">
+    <div className="shop_products__section">
       <div className="choose__filter__container">
         <h3>Brand</h3>
 

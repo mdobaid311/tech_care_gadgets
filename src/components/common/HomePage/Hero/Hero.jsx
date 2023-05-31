@@ -19,8 +19,9 @@ const Hero = () => {
       id: 1,
       image1: image1,
       image2: image2,
-      title: "SUMMER SALE GET <span>30% OFF</span> ON ALL PRODUCTS.",
+      title: "GET UPTO <span>30% OFF</span> ON ALL PRODUCTS.",
       link: "/shop",
+      buttonLabel: "SHOP NOW",
       background: background,
     },
     {
@@ -30,7 +31,8 @@ const Hero = () => {
       image2:
         "https://c1.wallpaperflare.com/preview/387/137/108/mobile-phone-phone-cellphone-technology.jpg",
       title: "All Smartphone Repairs <Span>and</Span> Services",
-      link: "/shop",
+      buttonLabel: "GET IN TOUCH",
+      link: "/contact",
       background: background2,
     },
     {
@@ -40,7 +42,8 @@ const Hero = () => {
       image2:
         "https://uploads-ssl.webflow.com/60cca9384ff7eaa931a24b69/60ce44133ce5aee0e6c9cac9_Mern.png",
       title: "Web Design <Span>and</Span> Development",
-      link: "/shop",
+      buttonLabel: "KNOW MORE",
+      link: "/contact",
       background: background3,
     },
   ];
@@ -51,7 +54,7 @@ const Hero = () => {
       setCurrent(current === slides.length - 1 ? 0 : current + 1);
     }, 5000);
     return () => clearInterval(interval);
-  }, [current]);
+  }, [current, slides.length]);
 
   return (
     <div
@@ -66,7 +69,7 @@ const Hero = () => {
             {/* SUMMER SALE GET <span>30% OFF</span> ON ALL PRODUCTS. */}
             {parse(slides[current].title)}
           </h1>
-          <Link to="/shop">SHOP NOW</Link>
+          <Link to={slides[current].link}>{slides[current].buttonLabel}</Link>
         </div>
         <div className="content__images">
           <img src={slides[current].image1} alt="" />

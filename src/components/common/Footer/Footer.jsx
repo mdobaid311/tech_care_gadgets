@@ -7,32 +7,6 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="footer__container">
-        <div className="footer__logo">
-          <img src={logo} alt="" />
-        </div>
-        <div className="footer__features">
-          <h3>Features</h3>
-          <ul>
-            <li>Men</li>
-            <li>Women</li>
-            <li>Children</li>
-            <li>Boys</li>
-            <li>Girls</li>
-            <li>New Arrivals</li>
-            <li>Shoes</li>
-            <li>Accessories</li>
-          </ul>
-        </div>
-        <div className="footer__menu">
-          <h3>Menu</h3>
-          <ul>
-            <li>About us </li>
-            <li>Contact us</li>
-            <li>My Account</li>
-            <li>My Wishlist</li>
-            <li>My Cart</li>
-          </ul>
-        </div>
         <div className="footer__contactus">
           <h3>Contact us</h3>
 
@@ -76,11 +50,16 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="footer__joinus">
-          <h3>Join our </h3>
-          <span>Subscribe to our newsletters</span>
+        <form className="footer__contact">
+          <h2>Contact us</h2>
+          <input type="text" placeholder="Name" />
           <input type="email" placeholder="Email Address" />
-          <button>Subscribe</button>
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Message"></textarea>
+          <button>Submit</button>
+        </form>
+        <div className="footer__logo">
+          <img src={logo} alt="" />
         </div>
       </div>
     </div>

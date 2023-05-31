@@ -2,6 +2,19 @@
   display: flex;
   width: 100%;
   margin-top: 20px;
+  flex-direction: column;
+h1{
+  text-align: center;
+  text-transform: uppercase;
+
+  @media screen and (max-width: 800px) {
+   font-size: 12px;
+  }
+}
+
+.products__section_products_grid{
+  display: flex;
+}
 
   .choose__filter__container {
     display: flex;
@@ -10,6 +23,10 @@
     max-width: 250px;
     border-right: 1px solid #c4c4c4;
     padding: 20px;
+
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
 
     h3 {
       font-size: 20px;

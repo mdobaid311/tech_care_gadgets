@@ -1,7 +1,6 @@
-.products__section {
+.shop_products__section {
   display: flex;
   width: 100%;
-  margin-top: 20px;
 
   .choose__filter__container {
     display: flex;
@@ -10,6 +9,10 @@
     max-width: 250px;
     border-right: 1px solid #c4c4c4;
     padding: 20px;
+
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
 
     .sizes__container {
       display: flex;
@@ -116,7 +119,7 @@
 
       span {
         margin-left: 10px;
-         
+
         text-transform: uppercase;
         font-weight: lighter;
       }
