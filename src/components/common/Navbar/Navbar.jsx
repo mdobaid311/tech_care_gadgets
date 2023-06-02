@@ -25,72 +25,77 @@ const Navbar = () => {
   return (
     <header>
       <nav className="navbar container">
-        <a href="#">
+        <Link to="#">
           <img src={logo} alt="Tech Care Gadgets" className="navbar__logo" />
-        </a>
+        </Link>
         <div className={`navbar__menu ${isMenuActive ? "right-open" : ""}`}>
           <ul className="navbar__list">
             <li className="navbar__list-drop">
-              <a href="#" onClick={() => toggleDropdown(0)}>
-                Features
-                <AiFillCaretDown />
-              </a>
-              <ul
+              <Link to="/" onClick={() => toggleDropdown(0)}>
+                Home
+                {/* <AiFillCaretDown /> */}
+              </Link>
+              {/* <ul
                 className={`navbar__list-drop-menu features ${
                   activeDropdowns[0] ? "open" : ""
                 }`}
               >
                 <li>
-                  <a href="#">
+                  <Link to="#">
                     <span>Todo List</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Calendar</a>
+                  <Link to="#">Calendar</Link>
                 </li>
                 <li>
-                  <a href="#">Reminders</a>
+                  <Link to="#">Reminders</Link>
                 </li>
                 <li>
-                  <a href="#">Planning</a>
+                  <Link to="#">Planning</Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
             <li className="navbar__list-drop">
-              <a href="#" onClick={() => toggleDropdown(1)}>
-                Company
+              <Link to="#" onClick={() => toggleDropdown(1)}>
+                Shop
                 <AiFillCaretDown />
-              </a>
+              </Link>
               <ul
                 className={`navbar__list-drop-menu company ${
                   activeDropdowns[1] ? "open" : ""
                 }`}
               >
                 <li>
-                  <a href="#">History</a>
+                  <Link to="/shop">All</Link>
                 </li>
                 <li>
-                  <a href="#">Our Team</a>
+                  <Link to="#">Categories</Link>
                 </li>
                 <li>
-                  <a href="#">Blog</a>
+                  <Link to="#">Brands</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#">Careers</a>
+              <Link to="/contact">Contact Us</Link>
             </li>
-            <li>
-              <a href="#">About</a>
-            </li>
+            {/* <li>
+              <Link to="#">About</Link>
+            </li> */}
           </ul>
           <div className="navbar__buttons">
-            <a className="navbar__buttons-login" href="#">
+            <Link to="/cart" className="navbar__shopping_cart">
+              <BiShoppingBag className="icon" />
+              <div>
+                <span>Shopping Cart</span>
+                <span>10 USD</span>
+              </div>
+            </Link>
+
+            <Link className="navbar__buttons-login" to="#">
               Login
-            </a>
-            <button className="navbar__buttons-register" href="#">
-              Register
-            </button>
+            </Link>
           </div>
         </div>
         <div className="demo">
