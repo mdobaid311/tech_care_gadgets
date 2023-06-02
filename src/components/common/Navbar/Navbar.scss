@@ -145,6 +145,8 @@
 
 .mobile__navbar {
   display: none;
+  width: 100%;
+
   @media (max-width: 768px) {
     display: flex;
   }
@@ -258,14 +260,14 @@ nav {
       position: relative;
       background: $primary-color;
       height: 100vh;
-      width: 100%;
       flex-direction: column;
       justify-content: flex-start;
       clip-path: circle(50px at 90% -20%);
       -webkit-clip-path: circle(50px at 90% -10%);
-      transition: all .3s ease-out;
+      transition: all 0.3s ease-out;
       pointer-events: none;
       margin-top: 80px;
+      overflow: hidden;
 
       &.open {
         clip-path: circle(1000px at 90% -10%);
@@ -275,7 +277,7 @@ nav {
 
       li {
         margin: 20px 0;
-        a{
+        a {
           font-size: 1.5rem;
           margin: 20px 0;
           color: #fff;
