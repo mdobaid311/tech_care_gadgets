@@ -1,7 +1,8 @@
 .shop_products__section {
   display: flex;
   width: 100%;
-
+  overflow: hidden;
+  
   .choose__filter__container {
     display: flex;
     flex-direction: column;
