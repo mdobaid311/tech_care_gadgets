@@ -67,6 +67,10 @@
         .icon {
           margin-right: 5px;
         }
+
+        @media screen and (max-width: 800px) {
+          display: none;
+        }
       }
 
       .save__button {
@@ -79,6 +83,10 @@
         }
         .icon {
           margin-right: 5px;
+        }
+
+        @media screen and (max-width: 800px) {
+          display: none;
         }
       }
     }
