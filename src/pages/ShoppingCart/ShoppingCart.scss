@@ -4,6 +4,11 @@
   padding: 20px 100px;
   flex: 1;
 
+  @media screen and (max-width: 1024px) {
+   padding: 20px 10px;
+   }
+
+
   h1 {
     font-size: 30px;
     font-weight: bold;
@@ -13,6 +18,11 @@
 
   .shopping_cart {
     display: flex;
+
+    @media screen and (max-width: 1024px) {
+     width: 100%;
+      flex-direction: column;
+    }
 
     .cart__items {
       display: flex;
@@ -115,6 +125,12 @@
     height: max-content;
     width: 100%;
     max-width: 400px;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      margin: 20px 0;
+     }
+ 
 
     .order_summary {
       display: flex;
