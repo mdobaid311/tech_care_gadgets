@@ -4,6 +4,7 @@ import Navbar from "../common/Navbar/Navbar";
 import Footer from "../common/Footer/Footer";
 import { client } from "../../sanity/client";
 import { useStateContext } from "../../context/stateContext";
+ 
 
 const AppLayout = () => {
   const router = useNavigate();
@@ -31,6 +32,7 @@ const AppLayout = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        overflow: "hidden",
       }}
     >
       <Navbar />
