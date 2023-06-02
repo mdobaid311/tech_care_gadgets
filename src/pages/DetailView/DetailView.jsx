@@ -3,7 +3,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 import "./DetailView.scss";
 import { useParams } from "react-router-dom";
 import { client } from "../../sanity/client";
- 
 
 const DetailView = () => {
   const { id } = useParams();
@@ -49,120 +48,17 @@ const DetailView = () => {
         <span className="brand__name">{product?.brand}</span>
         <h1 className="product__title">{product?.name}</h1>
 
-        <h3>Select Size</h3>
-        <div className="sizes__container">
-          <div className="size__box selected__size">XS</div>
-          <div className="size__box">S</div>
-          <div className="size__box">M</div>
-          <div className="size__box">L</div>
-          <div className="size__box">XL</div>
-          <div className="size__box">XXL</div>
-        </div>
-        <h3>Select Color</h3>
-        <div className="colors__container">
-          <div className="color__box selected__color">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-          <div className="color__box ">
-            <div
-              className="color__box__inner"
-              style={{
-                backgroundColor:
-                  "#" +
-                  ((Math.random() * 0xffffff) << 0)
-                    .toString(16)
-                    .padStart(6, "0"),
-              }}
-            ></div>
-          </div>
-        </div>
         <div className="quantity_and__total">
           <div className="quantity">
             <h3>Quantity</h3>
             <div className="quantity_box">
               <button className="quantity__btn">-</button>
-              <input type="text" className="quantity__input" />
+              <input
+                type="text"
+                className="quantity__input"
+                value={0}
+                onChange={() => {}}
+              />
               <button className="quantity__btn">+</button>
             </div>
           </div>

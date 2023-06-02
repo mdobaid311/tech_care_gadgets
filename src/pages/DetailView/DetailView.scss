@@ -5,10 +5,20 @@
   align-items: center;
   flex: 1;
 
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
+
   .detail_view__images {
     display: flex;
     flex: 1;
     justify-content: center;
+
+    @media screen and (max-width: 1024px) {
+      flex-direction: column-reverse;
+      margin: 10px 0;
+      padding: 10px;
+    }
 
     .thumbnails {
       display: flex;
@@ -20,6 +30,8 @@
         margin: 5px;
         border: 1px solid transparent;
         cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
       }
 
       img:hover {
@@ -37,12 +49,27 @@
   .detail_view__detail {
     flex: 1;
 
+    @media screen and (max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+    }
+
     .brand__name {
+      display: inline-block;
       font-size: 15px;
       font-weight: 500;
       margin-bottom: 10px;
       padding: 5px 10px;
       background-color: #ccc;
+    }
+
+    .product__title {
+      font-size: 25px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 15px;
+      }
+
     }
 
     h3 {
