@@ -18,17 +18,13 @@
 }
 
 :root {
-  --theme-light-color: hsl(0, 0%, 98%);
-  --theme-dark-color: hsl(0, 0%, 8%);
-  --text-gray-color: hsl(0, 0%, 41%);
+  --theme-light-color: #000;
+  --theme-dark-color:#fff;
+  --text-gray-color: #fff;
   --body-font: "Epilogue", sans-serif;
 }
 
-body {
-  background-color: var(--theme-light-color);
-  font-family: var(--body-font);
-  line-height: 1;
-}
+ 
 
 img {
   width: 100%;
@@ -59,7 +55,7 @@ ul {
 }
 
 header {
-  position: fixed;
+  position: sticky;
   width: 100%;
   top: 0;
   right: 0;
@@ -221,7 +217,7 @@ header {
       display: block;
       width: 22px;
       height: 4px;
-      background: #000000;
+      background: #ffffff;
       margin-bottom: 2px;
       border-radius: 1px;
       transition: all 275ms ease;
@@ -229,6 +225,7 @@ header {
 
     &.active {
       transform: rotate(-45deg);
+     
 
       .bar1 {
         transform: rotate(0deg) translateY(6px);
@@ -375,5 +372,4 @@ main {
   height: 50px;
   width: 50px;
   object-fit: contain;
-  filter: contrast(0);
 }

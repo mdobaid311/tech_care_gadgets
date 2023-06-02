@@ -3,22 +3,23 @@ import "./Navbar.scss";
 import logo from "../../../assets/tech-care-gadgets-logo.png";
 import { Link } from "react-router-dom";
 import { BiSearch, BiShoppingBag } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillCaretDown, AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useStateContext } from "../../../context/stateContext";
 import Menu from "../Menu/Menu";
 
 const Navbar = () => {
+  const [activeDropdowns, setActiveDropdowns] = useState([]);
   const [isMenuActive, setIsMenuActive] = useState(false);
+
+  const toggleDropdown = (index) => {
+    const newActiveDropdowns = [...activeDropdowns];
+    newActiveDropdowns[index] = !newActiveDropdowns[index];
+    setActiveDropdowns(newActiveDropdowns);
+  };
 
   const toggleMenu = () => {
     setIsMenuActive(!isMenuActive);
-  };
-
-  const toggleDropdown = (event) => {
-    const toggleButton = event.currentTarget;
-    toggleButton.querySelector("svg").classList.toggle("up");
-    toggleButton.nextElementSibling.classList.toggle("open");
   };
 
   return (
@@ -29,21 +30,16 @@ const Navbar = () => {
         </a>
         <div className={`navbar__menu ${isMenuActive ? "right-open" : ""}`}>
           <ul className="navbar__list">
-            <li className="navbar__list-drop" onClick={toggleDropdown}>
-              <a href="#">
+            <li className="navbar__list-drop">
+              <a href="#" onClick={() => toggleDropdown(0)}>
                 Features
-                <svg
-                  className="toggle-button"
-                  stroke="#686868"
-                  strokeWidth="1.5"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 10 10"
-                >
-                  <path d="M1 1l4 4 4-4" />
-                </svg>
+                <AiFillCaretDown />
               </a>
-              <ul className="navbar__list-drop-menu features">
+              <ul
+                className={`navbar__list-drop-menu features ${
+                  activeDropdowns[0] ? "open" : ""
+                }`}
+              >
                 <li>
                   <a href="#">
                     <span>Todo List</span>
@@ -60,9 +56,16 @@ const Navbar = () => {
                 </li>
               </ul>
             </li>
-            <li className="navbar__list-drop" onClick={toggleDropdown}>
-              <a href="#">Company</a>
-              <ul className="navbar__list-drop-menu company">
+            <li className="navbar__list-drop">
+              <a href="#" onClick={() => toggleDropdown(1)}>
+                Company
+                <AiFillCaretDown />
+              </a>
+              <ul
+                className={`navbar__list-drop-menu company ${
+                  activeDropdowns[1] ? "open" : ""
+                }`}
+              >
                 <li>
                   <a href="#">History</a>
                 </li>
