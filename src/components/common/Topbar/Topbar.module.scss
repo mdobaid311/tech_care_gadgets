@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.topbar__desktop {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  padding: 0px 15px;
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+
+  .logo {
+    height: 80px;
+    width: 80px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .searchBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background: #fff;
+    border-radius: 5px;
+    height: 100%;
+
+    input {
+      flex: 1;
+      background: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 15px;
+      color: #000;
+      outline: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #000;
+      outline: none;
+      border-radius: 0 5px 5px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        font-size: 20px;
+        color: #000;
+      }
+    }
+  }
+
+  .signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    button {
+      background: white;
+      color: black;
+      font-size: 15px;
+      padding: 5px 10px;
+      border: none;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      font-weight: 400;
+      height: 100%;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      .icon{
+        font-size: 20px;
+      }
+
+      &:hover {
+        background: #eb5757;
+        color: #fff;
+      }
+    }
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #fff;
+      color: #000;
+      font-size: 12px;
+      padding: 2px 5px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+    }
+
+    .icon {
+      font-size: 30px;
+    }
+  }
+}
+.topbar__mobile {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #fff;
+  padding: 0px 15px;
+  flex-direction: column;
+  padding-bottom: 10px;
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+
+  .row_1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .logo {
+      height: 50px;
+      width: 50px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .signin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      button {
+        background: white;
+        color: black;
+        font-size: 15px;
+        padding: 5px 10px;
+        border: none;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        border-radius: 5px;
+        font-weight: 400;
+        height: 100%;
+        font-weight: 500;
+
+        &:hover {
+          background: #eb5757;
+          color: #fff;
+        }
+      }
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+
+      span {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #fff;
+        color: #000;
+        font-size: 12px;
+        padding: 2px 5px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+      }
+
+      .icon {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .searchBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background: #fff;
+    border-radius: 5px;
+    height: 100%;
+
+    input {
+      flex: 1;
+      background: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 15px;
+      color: #000;
+      outline: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #000;
+      outline: none;
+      border-radius: 0 5px 5px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        font-size: 20px;
+        color: #000;
+      }
+    }
+  }
+}

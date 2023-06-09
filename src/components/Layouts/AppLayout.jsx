@@ -4,6 +4,7 @@ import Navbar from "../common/Navbar/Navbar";
 import Footer from "../common/Footer/Footer";
 import { client } from "../../sanity/client";
 import { useStateContext } from "../../context/stateContext";
+import Topbar from "../common/Topbar/Topbar";
  
 
 const AppLayout = () => {
@@ -35,7 +36,8 @@ const AppLayout = () => {
         overflow: "hidden",
       }}
     >
-      <Navbar />
+      {/* <Navbar /> */}
+      <Topbar/>
       <Outlet />
       <Footer />
     </div>

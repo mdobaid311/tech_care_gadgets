@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import "./Navbar.scss";
 import logo from "../../../assets/tech-care-gadgets-logo.png";
 import { Link } from "react-router-dom";
-import { BiSearch, BiShoppingBag } from "react-icons/bi";
-import { AiFillCaretDown, AiOutlineHeart } from "react-icons/ai";
-import { useSelector } from "react-redux";
-import { useStateContext } from "../../../context/stateContext";
-import Menu from "../Menu/Menu";
+import {  BiShoppingBag } from "react-icons/bi";
+import { AiFillCaretDown } from "react-icons/ai";
+ 
 
 const Navbar = () => {
   const [activeDropdowns, setActiveDropdowns] = useState([]);
