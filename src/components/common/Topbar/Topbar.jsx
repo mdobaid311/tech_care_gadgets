@@ -26,6 +26,7 @@ const Topbar = () => {
   const options = [
     {
       label: "Cart",
+      handler: () => navigate("/cart"),
     },
     {
       label: "Sign Out",
