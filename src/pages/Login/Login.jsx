@@ -6,21 +6,28 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { decodeJWTRespnse } from "../../utils/jwt";
 import { useStateContext } from "../../context/stateContext";
+import axios from "axios";
+import Topbar from "../../components/common/Topbar/Topbar";
 
 const Login = () => {
   const { setUserDetails } = useStateContext();
 
-  const responseGoogle = (response) => {
+  const responseGoogle = async (response) => {
     const decoded = decodeJWTRespnse(response.credential);
-    setUserDetails(decoded);
+    const user = await axios.post(
+      "http://localhost:5000/api/v1/users/login",
+      decoded
+    );
+    setUserDetails(user.data.user);
   };
+
   return (
     <div className="login_page">
-      <Navbar />
+      <Topbar />
       <div className="login_form_container">
-        <h1>Create New Customer Account</h1>
+        <h1>Sign In</h1>
 
-        <div className="login_form">
+        {/* <div className="login_form">
           <h3>Login Information</h3>
           <div className="login_form_field">
             <label htmlFor="email">
@@ -42,16 +49,18 @@ const Login = () => {
             />
           </div>
           <div className="login_form_buttons">
-            <GoogleLogin
-              onSuccess={responseGoogle}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-              useOneTap
-            />
+          
             <button>Back</button>
           </div>
-        </div>
+        </div> */}
+
+        <GoogleLogin
+          onSuccess={responseGoogle}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+          useOneTap
+        />
       </div>
       <Footer />
     </div>

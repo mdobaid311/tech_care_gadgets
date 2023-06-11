@@ -4,20 +4,14 @@ import shirt1 from "../../assets/shirt-1.jpg";
 import { GiCancel } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../sanity/client";
+import axios from "axios";
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
-
-  
+   
 
   useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "user" && email=='mdobaid311@gmail.com']{_id,_ref,name, email,address,phoneNumber ,orders,cart[]->{..., "imageUrl": image[0].asset->url},"imageUrl": image[].asset->url}`
-      )
-      .then((data) => {
-        setCartItems(data[0].cart);
-      });
+    getCartItems()
   }, [cartItems]);
 
   const removeFromCart = async (product) => {
@@ -36,6 +30,12 @@ const ShoppingCart = () => {
     console.log("Product removed from cart successfully!");
   };
 
+  const getCartItems = async () => {
+    const prods = await axios.get('http://localhost:5000/api/v1/users/6485757dfdad724b04b6342e')
+    setCartItems(prods.data.user.cart)
+    console.log(cartItems)
+  }
+
   return (
     <div className="shopping_cart__container">
       <h1>Shopping Cart</h1>
@@ -53,7 +53,7 @@ const ShoppingCart = () => {
               <div key={i}>
                 <div className="cart_item__container">
                   <div className="cart_item__product">
-                    <img src={item?.imageUrl} alt="" />
+                    <img src={item?.images} alt="" />
                     <div className="cart_item__product__name">{item?.name}</div>
                   </div>
                   <div className="cart_item__price">${item?.price}</div>

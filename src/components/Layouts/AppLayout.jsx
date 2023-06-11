@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../common/Navbar/Navbar";
 import Footer from "../common/Footer/Footer";
-import { client } from "../../sanity/client";
 import { useStateContext } from "../../context/stateContext";
 import Topbar from "../common/Topbar/Topbar";
 
@@ -11,13 +10,21 @@ const AppLayout = () => {
   const { user, setUserDetails, setTotalPrice, totalPrice } = useStateContext();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      setUserDetails(user);
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    setUserDetails(userData);
+    if (userData) {
+      const res = await fetch(`http://localhost:5000/api/v1/users/${userData._id}`);
+      const data = await res.json();
+      console.log(data)
+      setUserDetails(data.user);
     } else {
       console.log("no user found");
     }
-  }, []);
+  }
 
   return (
     <div

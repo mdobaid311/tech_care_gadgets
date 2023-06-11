@@ -20,24 +20,15 @@ const Home = () => {
   }, []);
 
   const getAllProducts = async () => {
-    // await client
-    //   .fetch(
-    //     `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
-    //   )
-    //   .then((products) => {
-    //     setProducts(products);
-    //     console.log(products)
-    //   })
-    //   .catch(console.error);
-
-      const prods = await axios.get('http://localhost:5000/api/v1/products')
+        const prods = await axios.get('http://localhost:5000/api/v1/products')
       setProducts(prods.data.products)
 
   };
 
-  const responseGoogle = (response) => {
+  const responseGoogle = async (response) => {
     const decoded = decodeJWTRespnse(response.credential);
-    setUserDetails(decoded);
+    const user = await axios.post('http://localhost:5000/api/v1/users/login', decoded)
+    setUserDetails(user.data.user);
   };
 
   return (

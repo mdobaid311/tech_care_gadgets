@@ -10,16 +10,29 @@ const DetailView = () => {
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
+  const [productQty, setProductQty] = useState(0);
 
   useEffect(() => {
     getSingleProduct();
   }, []);
 
   const getSingleProduct = async () => {
-    const prod = await axios.get(`http://localhost:5000/api/v1/products/${id}`)
-    console.log(prod.data.product)
-    setProduct(prod.data.product)
-    setSelectedImage(prod.data.product.images[0])
+    const prod = await axios.get(`http://localhost:5000/api/v1/products/${id}`);
+    console.log(prod.data.product);
+    setProduct(prod.data.product);
+    setSelectedImage(prod.data.product.images[0]);
+  };
+
+  const setQuantity = (value) => {
+    setProductQty(value);
+  };
+
+  const addToCart = async() => {
+    const userId  =  '6476ebccf3829374ec7de89b'
+    const res = await axios.patch('http://localhost:5000/api/v1/users/cart',{
+      productId: id,
+      userId : userId,
+    })
   }
 
   return (
@@ -51,14 +64,30 @@ const DetailView = () => {
           <div className="quantity">
             <h3>Quantity</h3>
             <div className="quantity_box">
-              <button className="quantity__btn">-</button>
+              <button
+                className="quantity__btn"
+                onClick={() => {
+                  if (productQty > 0) {
+                    setQuantity(productQty - 1);
+                  }
+                }}
+              >
+                -
+              </button>
               <input
                 type="text"
                 className="quantity__input"
-                value={0}
+                value={productQty}
                 onChange={() => {}}
               />
-              <button className="quantity__btn">+</button>
+              <button
+                className="quantity__btn"
+                onClick={() => {
+                  setQuantity(productQty + 1);
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className="total__price">
@@ -67,7 +96,7 @@ const DetailView = () => {
           </div>
         </div>
         <div className="detail_view__buttons">
-          <button className="cart__button">Add to cart</button>
+          <button className="cart__button" onClick={addToCart}>Add to cart</button>
           <button className="save__button">
             <AiOutlineHeart className="icon" size={15} />
             Save

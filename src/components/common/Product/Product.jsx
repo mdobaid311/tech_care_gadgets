@@ -14,7 +14,6 @@ const Product = ({ product }) => {
   };
 
   
-  console.log(product);
 
   return (
     <Link to={`/shop/${product._id}`} className="product" key={product._id}>

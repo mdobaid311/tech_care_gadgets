@@ -11,7 +11,6 @@ import { MdLogout } from "react-icons/md";
 
 const Topbar = () => {
   const { user } = useStateContext();
-  console.log(user);
 
   const [isClicked, setIsClicked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(user?.given_name);
@@ -45,7 +44,7 @@ const Topbar = () => {
     <>
       <div className={styles.topbar__desktop}>
         <div className={styles.logo}>
-          <img src={logo} alt="" />
+          <Link to="/">          <img src={logo} alt="" /></Link>
         </div>
         <div className={styles.searchBar}>
           <input type="text" placeholder="Search Tech Care Gadgets..." />
@@ -53,10 +52,12 @@ const Topbar = () => {
             <BiSearch className={styles.icon} />
           </button>
         </div>
-        <div className={styles.cart}>
+        <Link to="/cart" className={styles.cart}>
+          
           <BsCart className={styles.icon} />
+         
           <span>1</span>
-        </div>
+        </Link>
         <div className={styles.signin}>
           {user ? (
             <div className={styles.dropdown}>
@@ -104,13 +105,13 @@ const Topbar = () => {
       <div className={styles.topbar__mobile}>
         <div className={styles.row_1}>
           <div className={styles.logo}>
-            <img src={logo} alt="" />
+          <Link to="/">          <img src={logo} alt="" /></Link>
           </div>
           <div className={styles.left}>
-            <div className={styles.cart}>
+            <Link to='/cart' className={styles.cart}>
               <BsCart className={styles.icon} />
               <span>1</span>
-            </div>
+            </Link>
             <div className={styles.signin}>
               {user ? (
                 <div className={styles.dropdown}>
