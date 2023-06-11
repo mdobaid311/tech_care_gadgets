@@ -88,7 +88,7 @@ export const StateContext = ({ children }) => {
 
   const setUserDetails = async (user) => {
     setUser(user);
-    // console.log(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   return (

@@ -4,22 +4,22 @@ import { useState } from "react";
 import { client } from "../../../../sanity/client";
 import Product from "../../Product/Product";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 const ProductsRibbon = ({ title }) => {
   const [products, setProducts] = useState(null);
 
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url
-    }`
-      )
-      .then((products) => {
-        setProducts(products);
-        // console.log(products);
-      })
-      .catch(console.error);
+  useEffect(  () => {
+    getAllProducts()
   }, []);
+
+ 
+  const getAllProducts = async () => {
+    const prods = await axios.get('http://localhost:5000/api/v1/products')
+    setProducts(prods.data.products)
+  };
+
 
   return (
     <div className="products__ribbon">

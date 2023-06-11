@@ -5,25 +5,18 @@ import Footer from "../common/Footer/Footer";
 import { client } from "../../sanity/client";
 import { useStateContext } from "../../context/stateContext";
 import Topbar from "../common/Topbar/Topbar";
- 
 
 const AppLayout = () => {
   const router = useNavigate();
-  const { user, setUserDetails, setTotalPrice,totalPrice } = useStateContext();
-
-  console.log(user);
+  const { user, setUserDetails, setTotalPrice, totalPrice } = useStateContext();
 
   useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "user" && email=='mdobaid311@gmail.com']{_id,name, email,address,phoneNumber ,orders,cart[]->{..., "imageUrl": image.asset->url},"imageUrl": image[].asset->url}`
-      )
-      .then((user) => {
-        setUserDetails(user[0]);
-        setTotalPrice(user[0].cart.reduce((acc, item) => acc + item.price, 0));
-        console.log(totalPrice)
-      })
-      .catch(console.error);
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setUserDetails(user);
+    } else {
+      console.log("no user found");
+    }
   }, []);
 
   return (
@@ -37,7 +30,7 @@ const AppLayout = () => {
       }}
     >
       {/* <Navbar /> */}
-      <Topbar/>
+      <Topbar />
       <Outlet />
       <Footer />
     </div>

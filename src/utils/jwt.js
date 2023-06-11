@@ -2,6 +2,7 @@ import jwt_decode from "jwt-decode";
 
 export const decodeJWTRespnse = (token) => {
   const response = jwt_decode(token);
+  console.log(response);
   return {
     email: response.email,
     name: response.name,

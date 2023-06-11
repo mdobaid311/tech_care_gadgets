@@ -5,29 +5,55 @@ import OffersGrid from "../../components/common/HomePage/OffersGrid/OffersGrid";
 import ProductsSection from "../../components/common/HomePage/ProductsSection/ProductsSection";
 import ProductsRibbon from "../../components/common/HomePage/ProductsRibbon/ProductsRibbon";
 import { client } from "../../sanity/client";
-import { useSelector } from "react-redux";
+import { GoogleLogin } from "@react-oauth/google";
+import { decodeJWTRespnse } from "../../utils/jwt";
+import styles from "./Home.module.scss";
+import { useStateContext } from "../../context/stateContext";
+import axios from 'axios'
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-
+  const { setUserDetails, user } = useStateContext();
 
   useEffect(() => {
     getAllProducts();
   }, []);
 
   const getAllProducts = async () => {
-    await client
-      .fetch(
-        `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
-      )
-      .then((products) => {
-        setProducts(products);
-      })
-      .catch(console.error);
+    // await client
+    //   .fetch(
+    //     `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
+    //   )
+    //   .then((products) => {
+    //     setProducts(products);
+    //     console.log(products)
+    //   })
+    //   .catch(console.error);
+
+      const prods = await axios.get('http://localhost:5000/api/v1/products')
+      setProducts(prods.data.products)
+
+  };
+
+  const responseGoogle = (response) => {
+    const decoded = decodeJWTRespnse(response.credential);
+    setUserDetails(decoded);
   };
 
   return (
-    <div>
+    <div className={styles.homepage__container}>
+      <div className={styles.google_login}>
+        {!user && (
+          <GoogleLogin
+            onSuccess={responseGoogle}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+            useOneTap
+            theme="filled_blue"
+          />
+        )}
+      </div>
       <Hero />
       <BrandLogoRibbon />
       <OffersGrid />

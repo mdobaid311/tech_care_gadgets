@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./productsSection.scss";
 import ProductsGrid from "../../ProductsGrid/ProductsGrid";
 import { client } from "../../../../sanity/client";
+import axios from "axios";
 
 const ProductsSection = () => {
   const [products, setProducts] = useState([]);
@@ -32,24 +33,9 @@ const ProductsSection = () => {
     }
   }, [products, categories, brandFilter]);
 
-  const filterCategory = (categories) => {
-    console.log(
-      `*[_type == 'product' && category in ["${categories.join(
-        '", "'
-      )}"]]{_id,name, price, category,"imageUrl": image[].asset->url}`
-    );
-    client
-      .fetch(
-        `*[_type == 'product' && category in ["${categories.join(
-          '", "'
-        )}"]]{_id,name, price, category,"imageUrl": image[].asset->url}
-      `
-      )
-      .then((result) => {
-        setProducts(result);
-        console.log(result);
-      })
-      .catch(console.error);
+  const filterCategory =async  (categories) => {
+    const prods = await axios.get('http://localhost:5000/api/v1/products')
+    setProducts(prods.data.products)
   };
 
   const filterBrand = (brand) => {
@@ -73,14 +59,8 @@ const ProductsSection = () => {
   };
 
   const getAllProducts = async () => {
-    await client
-      .fetch(
-        `*[_type == "product"]{_id,name, price, category,"imageUrl": image[].asset->url}`
-      )
-      .then((products) => {
-        setProducts(products);
-      })
-      .catch(console.error);
+    const prods = await axios.get('http://localhost:5000/api/v1/products')
+    setProducts(prods.data.products)
   };
 
   return (

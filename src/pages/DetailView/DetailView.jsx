@@ -18,7 +18,7 @@ const DetailView = () => {
       )
       .then((data) => {
         setProduct(data[0]);
-        setSelectedImage(data[0].imageUrl[0]);
+        setSelectedImage(data[0].images[0]);
       })
       .catch(console.error);
   }, []);
@@ -27,7 +27,7 @@ const DetailView = () => {
     <div className="detail_view__container">
       <div className="detail_view__images">
         <div className="thumbnails">
-          {product?.imageUrl?.map((image) => {
+          {product?.images?.map((image) => {
             return (
               <img
                 onClick={() => setSelectedImage(image)}

@@ -13,12 +13,18 @@ const Product = ({ product }) => {
     onAdd(product, 1);
   };
 
+  console.log(product);
+
   return (
     <Link to={`/shop/${product._id}`} className="product" key={product._id}>
       <div className="product__image">
-        {product?.imageUrl[0] && (
+        {product?.images[0] && (
           <img
-            src={product?.imageUrl[0] ? product.imageUrl[0] : ""}
+            src={
+              product?.images[0]
+                ? product.images[0]
+                : "https://img.freepik.com/premium-vector/smartphone-blank-screen-phone-mockup_172533-421.jpg?w=2000"
+            }
             alt="no image"
           />
         )}

@@ -7,7 +7,8 @@ import parse from "html-react-parser";
 
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
-import background from "../../../../assets/banner-iphones.png";
+ 
+import background from "../../../../assets/slides/iphone.jpg";
 import background2 from "../../../../assets/slides/wallpaper-background2.jpg";
 import background3 from "../../../../assets/slides/web-developer.jpg";
 

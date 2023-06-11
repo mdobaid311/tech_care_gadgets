@@ -5,11 +5,14 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { decodeJWTRespnse } from "../../utils/jwt";
+import { useStateContext } from "../../context/stateContext";
 
 const Login = () => {
+  const { setUserDetails } = useStateContext();
+
   const responseGoogle = (response) => {
     const decoded = decodeJWTRespnse(response.credential);
-    console.log(decoded);
+    setUserDetails(decoded);
   };
   return (
     <div className="login_page">
