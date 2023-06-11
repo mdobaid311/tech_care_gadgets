@@ -40,8 +40,9 @@ const [cartTotal, setCartTotal] = useState(0);
   };
 
   const getCartItems = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
     const prods = await axios.get(
-      `${import.meta.env.VITE_API_KEY}/api/v1/users/6485757dfdad724b04b6342e`
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/${user?._id}`
     );
     // if duplicate items, then increase quantity
     const mappedProds = prods.data.user.cart.reduce((acc, item) => {
