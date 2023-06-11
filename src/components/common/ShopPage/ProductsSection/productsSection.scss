@@ -2,7 +2,28 @@
   display: flex;
   width: 100%;
   overflow: hidden;
-  
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+
+  h2 {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+    font-weight: 600;
+
+    @media screen and (min-width: 800px) {
+    display: none;
+  }
+
+    .icon {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+  }
+
   .choose__filter__container {
     display: flex;
     flex-direction: column;
@@ -124,4 +145,105 @@
       }
     }
   }
+
+  .choose__filter__mobile__container {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    left: 0;
+    bottom: 0;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    animation: slideIn 0.5s forwards;
+    display: flex;
+    flex-direction: column;
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .mobile__filter_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #c4c4c4;
+
+      .close__button {
+        outline: none;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        border-bottom: 1px solid transparent;
+        color: #0404c4;
+
+        &:hover {
+          border-bottom: 1px solid #000;
+          color: #000;
+        }
+      }
+    }
+
+    .main__filter_container {
+      display: flex;
+      flex: 1;
+
+      .filter__option {
+        // height: 100vh;
+        background: #dfdddd;
+        width: 30%;
+        h3 {
+          color: #000000;
+          font-size: 15px;
+          font-weight: 500;
+          text-transform: uppercase;
+          padding: 10px;
+        }
+
+        .active {
+          background-color: rgba(255, 255, 255, 1);
+          font-weight: 600;
+          color: #000;
+        }
+      }
+
+      .filter__container {
+        display: flex;
+        align-items: center;
+        margin: 10px 10px;
+
+        input[type="checkbox"] {
+          width: 22px;
+          height: 22px;
+        }
+
+        span {
+          margin-left: 10px;
+          text-transform: uppercase;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .show__results {
+      padding: 20px;
+      background: #000;
+      color: #fff;
+      span {
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
 }
+
+ 

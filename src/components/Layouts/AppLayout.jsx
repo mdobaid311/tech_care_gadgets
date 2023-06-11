@@ -7,7 +7,7 @@ import Topbar from "../common/Topbar/Topbar";
 
 const AppLayout = () => {
   const router = useNavigate();
-  const { user, setUserDetails, setTotalPrice, totalPrice } = useStateContext();
+  const {   setUserDetails ,setQty} = useStateContext();
 
   useEffect(() => {
     getUserData();
@@ -17,9 +17,9 @@ const AppLayout = () => {
     const userData = JSON.parse(localStorage.getItem("user"));
     setUserDetails(userData);
     if (userData) {
-      const res = await fetch(`http://localhost:5000/api/v1/users/${userData._id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_KEY}/api/v1/users/${userData._id}`);
       const data = await res.json();
-      console.log(data)
+      setQty(data?.user?.cart?.length)
       setUserDetails(data.user);
     } else {
       console.log("no user found");

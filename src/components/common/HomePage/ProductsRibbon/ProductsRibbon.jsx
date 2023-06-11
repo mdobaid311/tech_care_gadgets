@@ -16,7 +16,7 @@ const ProductsRibbon = ({ title }) => {
 
  
   const getAllProducts = async () => {
-    const prods = await axios.get('http://localhost:5000/api/v1/products')
+    const prods = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products`)
     setProducts(prods.data.products)
   };
 

@@ -7,7 +7,7 @@ const ProductsSection = ({ products }) => {
     <div className="products__section">
       <h1>Featured Products</h1>
       <div className="products__section_products_grid">
-        <div className="choose__filter__container">
+        {/* <div className="choose__filter__container">
           <h3>Shop Some Tech:</h3>
           <div className="filter__container">
             <input type="checkbox" />
@@ -25,7 +25,7 @@ const ProductsSection = ({ products }) => {
             <input type="checkbox" />
             <span>Trending</span>
           </div>
-        </div>
+        </div> */}
         <ProductsGrid products={products} />
       </div>
     </div>

@@ -10,8 +10,9 @@ export const StateContext = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(0);
   const [user, setUser] = useState();
+  const [searchText, setSearchText] = useState("");
 
   let foundProduct;
   let index;
@@ -91,6 +92,8 @@ export const StateContext = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
+
+
   return (
     <Context.Provider
       value={{
@@ -100,6 +103,7 @@ export const StateContext = ({ children }) => {
         totalQuantities,
         cartItems,
         user,
+        searchText,
         incQty,
         decQty,
         onAdd,
@@ -110,6 +114,8 @@ export const StateContext = ({ children }) => {
         setTotalPrice,
         setTotalQuantities,
         setUserDetails,
+        setSearchText,
+        setQty
       }}
     >
       {children}

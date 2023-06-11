@@ -4,9 +4,11 @@ import "./DetailView.scss";
 import { useParams } from "react-router-dom";
 import { client } from "../../sanity/client";
 import axios from "axios";
+import { useStateContext } from "../../context/stateContext";
 
 const DetailView = () => {
   const { id } = useParams();
+  const {qty, incQty} = useStateContext()
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
@@ -17,7 +19,7 @@ const DetailView = () => {
   }, []);
 
   const getSingleProduct = async () => {
-    const prod = await axios.get(`http://localhost:5000/api/v1/products/${id}`);
+    const prod = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products/${id}`);
     console.log(prod.data.product);
     setProduct(prod.data.product);
     setSelectedImage(prod.data.product.images[0]);
@@ -28,11 +30,14 @@ const DetailView = () => {
   };
 
   const addToCart = async() => {
-    const userId  =  '6476ebccf3829374ec7de89b'
-    const res = await axios.patch('http://localhost:5000/api/v1/users/cart',{
+    console.log(JSON.parse(localStorage.getItem('user')))
+    const userId  =  JSON.parse(localStorage.getItem('user'))._id
+    const res = await axios.patch(`${import.meta.env.VITE_API_KEY}/api/v1/users/cart`,{
       productId: id,
       userId : userId,
     })
+    incQty()
+    console.log(res.data.message)
   }
 
   return (

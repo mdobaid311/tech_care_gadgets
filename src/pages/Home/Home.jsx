@@ -20,14 +20,14 @@ const Home = () => {
   }, []);
 
   const getAllProducts = async () => {
-        const prods = await axios.get('http://localhost:5000/api/v1/products')
+        const prods = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products`)
       setProducts(prods.data.products)
 
   };
 
   const responseGoogle = async (response) => {
     const decoded = decodeJWTRespnse(response.credential);
-    const user = await axios.post('http://localhost:5000/api/v1/users/login', decoded)
+    const user = await axios.post(`${import.meta.env.VITE_API_KEY}/api/v1/users/login`, decoded)
     setUserDetails(user.data.user);
   };
 

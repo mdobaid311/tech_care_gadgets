@@ -15,7 +15,7 @@ const Login = () => {
   const responseGoogle = async (response) => {
     const decoded = decodeJWTRespnse(response.credential);
     const user = await axios.post(
-      "http://localhost:5000/api/v1/users/login",
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/login`,
       decoded
     );
     setUserDetails(user.data.user);

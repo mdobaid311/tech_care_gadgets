@@ -5,36 +5,97 @@ import { GiCancel } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../sanity/client";
 import axios from "axios";
+import { useStateContext } from "../../context/stateContext";
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
-   
+  const { qty, incQty, decQty } = useStateContext();
+const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    getCartItems()
-  }, [cartItems]);
+    getCartItems();
+  }, []);
 
-  const removeFromCart = async (product) => {
-    const productReference = {
-      _key: product._key,
-      _type: "reference",
-      _ref: product._id,
-    };
-    // await client
-    //   .patch(user.user._id)
-    //   .unset([`cart[_ref=="${product._id}"]`])
-    //   .commit();
+  const decreaseQty = async (product) => {
+    const res = await axios.patch(
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/reduce-quantity`,
+      {
+        productId: product._id,
+        userId: JSON.parse(localStorage.getItem("user"))._id,
+      }
+    );
 
-    setCartItems((prev) => prev.filter((item) => item._id !== product._id));
-    console.log(cartItems);
-    console.log("Product removed from cart successfully!");
+    setCartItems((prev) =>
+      prev.map((item) => {
+        if (item._id === product._id) {
+          item.quantity -= 1;
+        }
+        return item;
+      })
+    );
+    setCartTotal(prev=>{
+      return prev - product.price
+    });
+    decQty();
   };
 
   const getCartItems = async () => {
-    const prods = await axios.get('http://localhost:5000/api/v1/users/6485757dfdad724b04b6342e')
-    setCartItems(prods.data.user.cart)
-    console.log(cartItems)
-  }
+    const prods = await axios.get(
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/6485757dfdad724b04b6342e`
+    );
+    // if duplicate items, then increase quantity
+    const mappedProds = prods.data.user.cart.reduce((acc, item) => {
+      const existingItem = acc.find((i) => i._id === item._id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        acc.push({ ...item, quantity: 1 });
+      }
+      return acc;
+    }, []);
+
+    setCartItems(mappedProds);
+    setCartTotal(Math.round(
+      mappedProds.reduce((acc, item) => acc + item?.price*item?.quantity, 0)
+    ));
+    console.log(cartItems);
+  };
+
+  const increaseQuantity = async (product_id) => {
+    console.log(JSON.parse(localStorage.getItem("user")));
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+    const res = await axios.patch(`${import.meta.env.VITE_API_KEY}/api/v1/users/cart`, {
+      productId: product_id,
+      userId: userId,
+    });
+    incQty();
+    setCartItems((prev) =>
+      prev.map((item) => {
+        if (item._id === product_id) {
+          item.quantity += 1;
+        }
+        return item;
+      })
+    );
+    const product = cartItems.find((item) => item._id === product_id);
+    setCartTotal(prev=>{
+      return prev + product.price
+    });
+  };
+
+  const removeItemFromCart = async (product_id) => {
+    const res = await axios.patch(
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/remove-from-cart`,
+      {
+        productId: product_id,
+        userId: JSON.parse(localStorage.getItem("user"))._id,
+      }
+    );
+    setCartItems((prev) => prev.filter((item) => item._id !== product_id));
+    const product = cartItems.find((item) => item._id === product_id);
+    const total = cartTotal - product.price*product.quantity;
+    setCartTotal(total);
+  };
 
   return (
     <div className="shopping_cart__container">
@@ -57,13 +118,40 @@ const ShoppingCart = () => {
                     <div className="cart_item__product__name">{item?.name}</div>
                   </div>
                   <div className="cart_item__price">${item?.price}</div>
-                  <div className="cart_item__quantity">1</div>
-                  <div className="cart_item__total">${item?.price}</div>
+                  <div className="cart_item__quantity">
+                    <div className="quantity_box">
+                      <button
+                        className="quantity__btn"
+                        onClick={() => {
+                          decreaseQty(item);
+                        }}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="quantity__input"
+                        value={item?.quantity}
+                        onChange={() => {}}
+                      />
+                      <button
+                        className="quantity__btn"
+                        onClick={() => {
+                          increaseQuantity(item?._id);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="cart_item__total">
+                    ${Math.round(item?.price * item?.quantity)}
+                  </div>
                   <div className="cart_item__options">
                     <button
                       className="cart_item__option"
                       onClick={() => {
-                        removeFromCart(item);
+                        removeItemFromCart(item._id);
                       }}
                     >
                       <GiCancel />
@@ -78,7 +166,7 @@ const ShoppingCart = () => {
           <div className="order_summary">
             <div className="subtotal">
               <h4>Subtotal</h4>
-              <h4>120.00 EUR</h4>
+              <h4>${Math.round(cartTotal)}</h4>
             </div>
             <div className="tax">
               <h4>Tax</h4>
@@ -86,7 +174,7 @@ const ShoppingCart = () => {
             </div>
             <div className="order_total">
               <h3>Order Total</h3>
-              <h3>120.00 EUR</h3>
+              <h3>${Math.round(cartTotal)}</h3>
             </div>
             <button>Proceed to Checkout</button>
           </div>

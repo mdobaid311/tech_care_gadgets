@@ -5,15 +5,26 @@ import { client, urlFor } from "../../../sanity/client";
 import { v4 as uuidv4 } from "uuid";
 import { useStateContext } from "../../../context/stateContext";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Product = ({ product }) => {
-  const { onAdd } = useStateContext();
+  const { incQty} = useStateContext();
 
   const onAddToCart = async (product) => {
-    onAdd(product, 1);
+    console.log(JSON.parse(localStorage.getItem('user')))
+    const userId  =  JSON.parse(localStorage.getItem('user'))._id
+    const res = await axios.patch(`${import.meta.env.VITE_API_KEY}/api/v1/users/cart`,{
+      productId: product._id,
+      userId : userId,
+    })
+    incQty()
+    console.log(res.data.message)
   };
 
-  
+  const addToCart = async() => {
+   
+  }
+
 
   return (
     <Link to={`/shop/${product._id}`} className="product" key={product._id}>

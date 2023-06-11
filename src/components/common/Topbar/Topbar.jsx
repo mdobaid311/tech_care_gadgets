@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../../assets/tech-care-gadgets-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import styles from "./Topbar.module.scss";
 import { BsCart } from "react-icons/bs";
@@ -10,8 +10,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 
 const Topbar = () => {
-  const { user } = useStateContext();
-
+  const { user,setSearchText,searchText,qty } = useStateContext();
   const [isClicked, setIsClicked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(user?.given_name);
 
@@ -20,6 +19,9 @@ const Topbar = () => {
     localStorage.removeItem("user");
     window.location.reload();
   };
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const options = [
     {
@@ -35,10 +37,14 @@ const Topbar = () => {
     setIsClicked(!isClicked);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsClicked(false);
-  };
+  const searchHandler = (e) => {
+    e.preventDefault();
+    if(location.pathname!=='/shop'){
+      navigate('/shop');
+    }
+    setSearchText(e.target.value);
+  }
+
 
   return (
     <>
@@ -47,7 +53,9 @@ const Topbar = () => {
           <Link to="/">          <img src={logo} alt="" /></Link>
         </div>
         <div className={styles.searchBar}>
-          <input type="text" placeholder="Search Tech Care Gadgets..." />
+          <input type="text" value={searchText} placeholder="Search Tech Care Gadgets..." onInput={
+            searchHandler
+          }  />
           <button>
             <BiSearch className={styles.icon} />
           </button>
@@ -56,7 +64,7 @@ const Topbar = () => {
           
           <BsCart className={styles.icon} />
          
-          <span>1</span>
+          <span>{qty}</span>
         </Link>
         <div className={styles.signin}>
           {user ? (
@@ -110,7 +118,7 @@ const Topbar = () => {
           <div className={styles.left}>
             <Link to='/cart' className={styles.cart}>
               <BsCart className={styles.icon} />
-              <span>1</span>
+              <span>{qty}</span>
             </Link>
             <div className={styles.signin}>
               {user ? (
@@ -158,7 +166,9 @@ const Topbar = () => {
         </div>
 
         <div className={styles.searchBar}>
-          <input type="text" placeholder="Search Tech Care Gadgets..." />
+          <input type="text" value={searchText} placeholder="Search Tech Care Gadgets..." onInput={
+            searchHandler
+          } />
           <button>
             <BiSearch className={styles.icon} />
           </button>

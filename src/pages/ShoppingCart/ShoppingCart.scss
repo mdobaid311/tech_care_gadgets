@@ -174,3 +174,25 @@
     }
   }
 }
+
+
+.quantity_box {
+  display: flex;
+  border: 1px solid #000;
+  margin-right: 10px;
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    padding: 5px 10px;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    width: 50px;
+    text-align: center;
+  }
+}

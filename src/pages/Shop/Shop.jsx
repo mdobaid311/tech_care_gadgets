@@ -5,6 +5,9 @@ import "./Shop.scss";
 import { BiSearch } from "react-icons/bi";
 
 const Shop = () => {
+
+
+
   return (
     <div className="shop__container">
       {/* <AdBanner /> */}

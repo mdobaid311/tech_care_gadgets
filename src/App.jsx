@@ -18,6 +18,7 @@ import DetailView from "./pages/DetailView/DetailView";
 import { gapi } from "gapi-script";
 
 function App() {
+  console.log(import.meta.env.VITE_API_KEY) // 123
   return (
     <BrowserRouter>
       <Routes>

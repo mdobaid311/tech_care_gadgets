@@ -1,139 +1,201 @@
 import React, { useEffect, useState } from "react";
 import "./productsSection.scss";
 import ProductsGrid from "../../ProductsGrid/ProductsGrid";
-import { client } from "../../../../sanity/client";
 import axios from "axios";
+import { useStateContext } from "../../../../context/stateContext";
+import { BsFilter } from "react-icons/bs";
 
 const ProductsSection = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [brandFilter, setBrandFilter] = useState([]);
+  const [brandFilters, setBrandFilters] = useState([]);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const { searchText } = useStateContext();
+  const [originalProductsList, setOriginalProductsList] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [filterOption, setfilterOption] = useState("categories");
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
 
   useEffect(() => {
-    client
-      .fetch(`*[_type == "product"]{ brand }`)
-      .then((result) => {
-        const uniqueBrands = [
-          ...new Set(result.map((product) => product.brand)),
-        ];
-        setBrands(uniqueBrands);
-        console.log(uniqueBrands);
-      })
-      .catch(console.error);
+    const getAllProducts = async () => {
+      const prods = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products`);
+      setOriginalProductsList(prods.data.products);
+      setProducts(prods.data.products);
 
-    if (products.length === 0) {
-      if (categories.length > 0) {
-        filterCategory(categories);
-      } else if (brandFilter.length > 0) {
-        filterBrand(brandFilter);
-      } else {
-        getAllProducts();
-      }
+      const allCategories = [
+        ...new Set(prods.data.products.map((product) => product.category)),
+      ];
+      const allBrands = [
+        ...new Set(prods.data.products.map((product) => product.brand)),
+      ];
+      setCategories(allCategories);
+      setBrands(allBrands);
+    };
+    getAllProducts();
+  }, []);
+
+  useEffect(() => {
+    if (searchText) {
+      const filteredProducts = originalProductsList.filter((product) => {
+        const lowercaseSearchText = searchText.toLowerCase();
+        return (
+          product.name.toLowerCase().includes(lowercaseSearchText) ||
+          product.brand.toLowerCase().includes(lowercaseSearchText) ||
+          product.category.toLowerCase().includes(lowercaseSearchText)
+        );
+      });
+      setProducts(filteredProducts);
+    } else {
+      setProducts(originalProductsList);
     }
-  }, [products, categories, brandFilter]);
+  }, [searchText]);
 
-  const filterCategory =async  (categories) => {
-    const prods = await axios.get('http://localhost:5000/api/v1/products')
-    setProducts(prods.data.products)
+  const handleBrandFilterChange = (brand, checked) => {
+    if (checked) {
+      setBrandFilters((prevFilters) => [...prevFilters, brand]);
+    } else {
+      setBrandFilters((prevFilters) =>
+        prevFilters.filter((item) => item !== brand)
+      );
+    }
   };
 
-  const filterBrand = (brand) => {
-    console.log(
-      `*[_type == 'product' && brand in ["${brand.join(
-        '", "'
-      )}"]]{_id,name, price, category,"imageUrl": image[].asset->url}`
-    );
-    client
-      .fetch(
-        `*[_type == 'product' && brand in ["${brand.join(
-          '", "'
-        )}"]]{_id,name, price, category,"imageUrl": image[].asset->url}
-      `
-      )
-      .then((result) => {
-        setProducts(result);
-        console.log(result);
-      })
-      .catch(console.error);
+  const handleCategoryFilterChange = (category, checked) => {
+    if (checked) {
+      setCategoryFilters((prevFilters) => [...prevFilters, category]);
+    } else {
+      setCategoryFilters((prevFilters) =>
+        prevFilters.filter((item) => item !== category)
+      );
+    }
   };
 
-  const getAllProducts = async () => {
-    const prods = await axios.get('http://localhost:5000/api/v1/products')
-    setProducts(prods.data.products)
-  };
+  useEffect(() => {
+    let filteredProducts = originalProductsList;
+
+    if (brandFilters.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        brandFilters.includes(product.brand)
+      );
+    }
+
+    if (categoryFilters.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        categoryFilters.includes(product.category)
+      );
+    }
+
+    setProducts(filteredProducts);
+  }, [brandFilters, categoryFilters]);
 
   return (
     <div className="shop_products__section">
       <div className="choose__filter__container">
         <h3>Brand</h3>
-
-        {brands?.map((product) => {
-          return (
-            <div className="filter__container" key={product}>
-              <input
-                type="checkbox"
-                onChange={(e) => {
-                  console.log(e.target.checked);
-                  if (e.target.checked) {
-                    setBrandFilter((prev) => [...prev, product]);
-                    filterBrand([...brandFilter, product]);
-                  } else {
-                    setBrandFilter((prev) =>
-                      prev.filter((cat) => cat !== product)
-                    );
-                    filterBrand(brandFilter.filter((cat) => cat !== product));
-                  }
-                }}
-              />
-              <span>{product}</span>
-            </div>
-          );
-        })}
+        {brands.map((brand) => (
+          <div className="filter__container" key={brand}>
+            <input
+              type="checkbox"
+              checked={brandFilters.includes(brand)}
+              onChange={(e) => handleBrandFilterChange(brand, e.target.checked)}
+            />
+            <span>{brand}</span>
+          </div>
+        ))}
         <h3>Category</h3>
-        <div className="filter__container">
-          <input
-            type="checkbox"
-            onChange={(e) => {
-              console.log(e.target.checked);
-              if (e.target.checked) {
-                setCategories((prev) => [...prev, "mobiles"]);
-                filterCategory([...categories, "mobiles"]);
-              } else {
-                setCategories((prev) =>
-                  prev.filter((cat) => cat !== "mobiles")
-                );
-                filterCategory(categories.filter((cat) => cat !== "mobiles"));
+        {categories.map((category) => (
+          <div className="filter__container" key={category}>
+            <input
+              type="checkbox"
+              checked={categoryFilters.includes(category)}
+              onChange={(e) =>
+                handleCategoryFilterChange(category, e.target.checked)
               }
-            }}
-          />
-          <span>Mobile</span>
-        </div>
-        <div className="filter__container">
-          <input
-            type="checkbox"
-            onChange={(e) => {
-              console.log(e.target.checked);
-              if (e.target.checked) {
-                setCategories((prev) => [...prev, "acessories"]);
-                filterCategory([...categories, "acessories"]);
-              } else {
-                setCategories((prev) =>
-                  prev.filter((cat) => cat !== "acessories")
-                );
-                filterCategory(
-                  categories.filter((cat) => cat !== "acessories")
-                );
-              }
-            }}
-          />
-          <span>Acessories</span>
-        </div>
-        {/* <h3>Price Range</h3> */}
-        {/* <div className="price__range__container">
-          <input type="range" />
-        </div> */}
+            />
+            <span>{category}</span>
+          </div>
+        ))}
       </div>
+      {showMobileFilter && (
+        <div className="choose__filter__mobile__container">
+          <div className="mobile__filter_header">
+            <span>Filters</span>
+            <button
+              onClick={() => {
+                setShowMobileFilter(false);
+              }}
+              className="close__button"
+            >
+              Close
+            </button>
+          </div>
+          <div className="main__filter_container">
+            <div className="filter__option">
+              <h3 className={filterOption === "brands" ? "active" : ""} 
+              onClick={() => setfilterOption("brands")}>
+              Brand</h3>
+              <h3 onClick={() => setfilterOption("categories")}
+              className={filterOption === "categories" ? "active" : ""}
+              >Categories</h3>
+            </div>
+            <div className="filter__options">
+              <div className="filter__items">
+                {filterOption === "brands"
+                  ? brands.map((brand) => {
+                      return (
+                        <div className="filter__container" key={brand}>
+                          <input
+                            type="checkbox"
+                            checked={brandFilters.includes(brand)}
+                            onChange={(e) =>
+                              handleBrandFilterChange(brand, e.target.checked)
+                            }
+                          />
+                          <span>{brand}</span>
+                        </div>
+                      );
+                    })
+                  : filterOption === "categories"
+                  ? categories.map((category) => {
+                      return (
+                        <div className="filter__container" key={category}>
+                          <input
+                            type="checkbox"
+                            checked={categoryFilters.includes(category)}
+                            onChange={(e) =>
+                              handleCategoryFilterChange(
+                                category,
+                                e.target.checked
+                              )
+                            }
+                          />
+                          <span>{category}</span>
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+            </div>
+          
+          </div>
+      <div className="show__results">
+        <span 
+        onClick={() => {
+          setShowMobileFilter(false);
+        }}
+        >Show {products.length} results</span>
+      </div>
+        </div>
+      )}
+
+      <h2
+        onClick={() => {
+          setShowMobileFilter(true);
+        }}
+        className="filter__mobile__button"
+      >
+        <BsFilter className="icon" /> Filter
+      </h2>
       <ProductsGrid products={products} />
     </div>
   );
