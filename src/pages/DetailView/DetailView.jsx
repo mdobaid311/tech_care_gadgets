@@ -3,6 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import "./DetailView.scss";
 import { useParams } from "react-router-dom";
 import { client } from "../../sanity/client";
+import axios from "axios";
 
 const DetailView = () => {
   const { id } = useParams();
@@ -11,17 +12,15 @@ const DetailView = () => {
   const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "product" && _id=="${id}"]{_id,name, price,brand, category,"imageUrl": image[].asset->url
-      }`
-      )
-      .then((data) => {
-        setProduct(data[0]);
-        setSelectedImage(data[0].images[0]);
-      })
-      .catch(console.error);
+    getSingleProduct();
   }, []);
+
+  const getSingleProduct = async () => {
+    const prod = await axios.get(`http://localhost:5000/api/v1/products/${id}`)
+    console.log(prod.data.product)
+    setProduct(prod.data.product)
+    setSelectedImage(prod.data.product.images[0])
+  }
 
   return (
     <div className="detail_view__container">

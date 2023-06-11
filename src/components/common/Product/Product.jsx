@@ -13,6 +13,7 @@ const Product = ({ product }) => {
     onAdd(product, 1);
   };
 
+  
   console.log(product);
 
   return (
