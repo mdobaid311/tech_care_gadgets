@@ -1,0 +1,117 @@
+.servicesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+
+  h1 {
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .services {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    flex-wrap: wrap;
+
+    .service {
+      display: flex;
+      border-radius: 5px;
+      justify-content: space-between;
+      margin: 10px;
+      width: 40%;
+      height: 300px;
+      box-shadow: rgba(0, 0, 0, 0.66) 0px 1px 4px;
+
+      @media screen and (max-width: 800px) {
+        height: 200px;
+        width: 100%;
+      }
+
+ 
+
+      .serviceImage {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        padding: 10px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          object-fit: cover;
+          padding: 10px;
+        }
+
+        &:hover {
+          //   opacity: 0.8;
+          cursor: pointer;
+        }
+      }
+
+      .servicesDetails {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-evenly;
+
+        h2 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #000;
+          margin: 0 auto;
+          text-align: center;
+          @media screen and (max-width: 800px) {
+            font-size: 1rem;
+          }
+        }
+
+        p {
+          font-size: 1rem;
+          font-weight: 400;
+          color: #000;
+          margin: 0 auto;
+          text-align: center;
+          @media screen and (max-width: 800px) {
+            font-size: 10px;
+          }
+        }
+
+        button {
+          margin-top: 20px;
+          padding: 10px 20px;
+          border: 2px solid black;
+          background-color: transparent;
+          font-size: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.1s ease-in-out;
+
+          @media screen and (max-width: 800px) {
+            font-size: 12px;
+            padding: 5px;
+            align-self: center;
+          }
+
+          &:hover {
+            background-color: black;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

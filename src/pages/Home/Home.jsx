@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Hero from "../../components/common/HomePage/Hero/Hero";
-import BrandLogoRibbon from "../../components/common/HomePage/BrandLogoRibbon/BrandLogoRibbon";
-import OffersGrid from "../../components/common/HomePage/OffersGrid/OffersGrid";
-import ProductsSection from "../../components/common/HomePage/ProductsSection/ProductsSection";
-import ProductsRibbon from "../../components/common/HomePage/ProductsRibbon/ProductsRibbon";
-import { client } from "../../sanity/client";
 import { GoogleLogin } from "@react-oauth/google";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import BrandLogoRibbon from "../../components/common/HomePage/BrandLogoRibbon/BrandLogoRibbon";
+import Hero from "../../components/common/HomePage/Hero/Hero";
+import Services from "../../components/common/HomePage/Services/Services";
+import { useStateContext } from "../../context/stateContext";
 import { decodeJWTRespnse } from "../../utils/jwt";
 import styles from "./Home.module.scss";
-import { useStateContext } from "../../context/stateContext";
-import axios from 'axios'
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -47,10 +44,11 @@ const Home = () => {
       </div>
       <Hero />
       <BrandLogoRibbon />
-      <OffersGrid />
+      {/* <OffersGrid />
       <ProductsSection products={products} />
       <ProductsRibbon title="Featured Items:" />
-      <ProductsRibbon title="Popular:" />
+      <ProductsRibbon title="Popular:" /> */}
+      <Services/>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 
 const Topbar = () => {
-  const { user,setSearchText,searchText,qty } = useStateContext();
+  const { user, setSearchText, searchText, qty } = useStateContext();
   const [isClicked, setIsClicked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(user?.given_name);
 
@@ -40,31 +40,37 @@ const Topbar = () => {
 
   const searchHandler = (e) => {
     e.preventDefault();
-    if(location.pathname!=='/shop'){
-      navigate('/shop');
+    if (location.pathname !== "/shop") {
+      navigate("/shop");
     }
     setSearchText(e.target.value);
-  }
-
+  };
 
   return (
     <>
       <div className={styles.topbar__desktop}>
         <div className={styles.logo}>
-          <Link to="/">          <img src={logo} alt="" /></Link>
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
         </div>
+        <Link to="/shop" className={styles.shopBtn}>
+          SHOP
+        </Link>
         <div className={styles.searchBar}>
-          <input type="text" value={searchText} placeholder="Search Tech Care Gadgets..." onInput={
-            searchHandler
-          }  />
+          <input
+            type="text"
+            value={searchText}
+            placeholder="Search Tech Care Gadgets..."
+            onInput={searchHandler}
+          />
           <button>
             <BiSearch className={styles.icon} />
           </button>
         </div>
         <Link to="/cart" className={styles.cart}>
-          
           <BsCart className={styles.icon} />
-         
+
           <span>{qty}</span>
         </Link>
         <div className={styles.signin}>
@@ -114,10 +120,15 @@ const Topbar = () => {
       <div className={styles.topbar__mobile}>
         <div className={styles.row_1}>
           <div className={styles.logo}>
-          <Link to="/">          <img src={logo} alt="" /></Link>
+            <Link to="/">
+              <img src={logo} alt="" />
+            </Link>
           </div>
           <div className={styles.left}>
-            <Link to='/cart' className={styles.cart}>
+            <Link to="/shop" className={styles.shopBtn}>
+              SHOP
+            </Link>
+            <Link to="/cart" className={styles.cart}>
               <BsCart className={styles.icon} />
               <span>{qty}</span>
             </Link>
@@ -167,9 +178,12 @@ const Topbar = () => {
         </div>
 
         <div className={styles.searchBar}>
-          <input type="text" value={searchText} placeholder="Search Tech Care Gadgets..." onInput={
-            searchHandler
-          } />
+          <input
+            type="text"
+            value={searchText}
+            placeholder="Search Tech Care Gadgets..."
+            onInput={searchHandler}
+          />
           <button>
             <BiSearch className={styles.icon} />
           </button>

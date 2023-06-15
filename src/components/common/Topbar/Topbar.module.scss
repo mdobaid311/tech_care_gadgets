@@ -157,7 +157,7 @@
     position: relative;
     color: #fff;
     text-decoration: none;
-    
+
     span {
       position: absolute;
       top: 0;
@@ -207,7 +207,6 @@
     .logo {
       height: 50px;
       width: 50px;
-
       img {
         height: 100%;
         width: 100%;
@@ -400,4 +399,27 @@ a {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+}
+
+.shopBtn {
+  padding: 5px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: transparent;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  color: #fff;
+
+  @media screen and (max-width: 800px) {
+    font-size: 12px;
+    padding: 10px;
+    align-self: center;
+  }
+
+  &:hover {
+    background-color: rgb(255, 253, 253);
+    color: rgb(0, 0, 0);
+  }
 }
