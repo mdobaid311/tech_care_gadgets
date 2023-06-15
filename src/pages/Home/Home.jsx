@@ -7,6 +7,7 @@ import Services from "../../components/common/HomePage/Services/Services";
 import { useStateContext } from "../../context/stateContext";
 import { decodeJWTRespnse } from "../../utils/jwt";
 import styles from "./Home.module.scss";
+import Testimonials from "../../components/common/HomePage/Testimonials/Testimonials";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -49,6 +50,7 @@ const Home = () => {
       <ProductsRibbon title="Featured Items:" />
       <ProductsRibbon title="Popular:" /> */}
       <Services/>
+      <Testimonials/>
     </div>
   );
 };
