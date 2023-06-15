@@ -51,7 +51,7 @@ const Services = () => {
               <div className={styles.servicesDetails}>
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
-                <button>Read More</button>
+                <button>CONTACT</button>
               </div>
             </div>
           );
