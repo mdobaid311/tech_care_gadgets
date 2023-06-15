@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import logo from "../../../assets/tech-care-gadgets-logo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
-import styles from "./Topbar.module.scss";
 import { BsCart } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from "../../../assets/tech-care-gadgets-logo.png";
 import { useStateContext } from "../../../context/stateContext";
-import { FaUserAlt } from "react-icons/fa";
-import { MdLogout } from "react-icons/md";
+import styles from "./Topbar.module.scss";
 
 const Topbar = () => {
   const { user, setSearchText, searchText, qty } = useStateContext();

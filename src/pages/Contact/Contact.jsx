@@ -1,7 +1,6 @@
 import React from "react";
-// import { MdLocationPin } from "react-icons/io";
-import { BsFillTelephoneFill } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import "./Contact.scss";
 
 const Contact = () => {
