@@ -86,7 +86,15 @@ const ProductsSection = () => {
     }
 
     setProducts(filteredProducts);
-  }, [brandFilters, categoryFilters]);
+  }, [brandFilters, categoryFilters,originalProductsList]);
+
+  useEffect(() => {
+    if (showMobileFilter) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [showMobileFilter]);
 
   return (
     <div className="shop_products__section">
