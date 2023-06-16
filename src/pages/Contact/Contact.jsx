@@ -15,7 +15,7 @@ const Contact = () => {
             </div>
             <h4>
               Address
-              <span>1234 Main St. Anywhere, ST 12345</span>
+              <span>17089 Yonge St Unit 2, Newmarket, ON L3Y 4V7, Canada</span>
             </h4>
           </div>
           <div className="contact_info">
@@ -24,7 +24,7 @@ const Contact = () => {
             </div>
             <h4>
               Phone
-              <span>9515281551</span>
+              <span><a href="tel:+19058365390">+19058365390</a></span>
             </h4>
           </div>
           <div className="contact_info">
@@ -33,7 +33,7 @@ const Contact = () => {
             </div>
             <h4>
               Email
-              <span>mdobaid311@gmail.com</span>
+              <span>techcaregadget@gmail.com</span>
             </h4>
           </div>
         </div>
