@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Services.module.scss";
 
 import service4 from "../../../../assets/services/Website Design & Development.png";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const services = [
@@ -51,7 +52,7 @@ const Services = () => {
               <div className={styles.servicesDetails}>
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
-                <button>CONTACT</button>
+                <Link to="/contact">CONTACT</Link>
               </div>
             </div>
           );
