@@ -147,7 +147,7 @@
   }
 
   .choose__filter__mobile__container {
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     position: absolute;
     z-index: 1000;
@@ -159,6 +159,7 @@
     animation: slideIn 0.5s forwards;
     display: flex;
     flex-direction: column;
+    border-top: 3px solid #000;
 
     @keyframes slideIn {
       0% {
