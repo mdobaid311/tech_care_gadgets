@@ -20,7 +20,7 @@ const Hero = () => {
       id: 1,
       image1: image1,
       image2: image2,
-      title: "QUICK FIX FOR ALL YOUR SMART PHONES @ <span>TECHCARE GADGETS</span>  ",
+      title: "QUICK FIX FOR ALL YOUR SMART PHONES @ <span>TECHCARE GADGETS</span>",
       link: "/shop",
       buttonLabel: "SHOP NOW",
       background: background,

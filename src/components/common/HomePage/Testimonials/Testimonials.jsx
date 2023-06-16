@@ -1,23 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Testimonials.module.scss";
 import testimonials from "./testimonials.json";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 
 const Testimonials = () => {
+  const [index, setIndex] = useState(0);
+  const [isMobile, setisMobile] = useState(false);
+
+  const changeTestimonials = (direction) => {
+    if (direction === "left") {
+      if (index === 0) {
+        setIndex(testimonials.length - 3);
+      } else {
+        setIndex(index - 1);
+      }
+    } else {
+      if (index === testimonials.length - 3) {
+        setIndex(0);
+      } else {
+        setIndex(index + 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    setisMobile(isMobile);
+    if (isMobile) {
+      setIndex(0);
+    }
+  }, [isMobile]);
+
   return (
     <div className={styles.testimonials__container}>
       <h1>Testimonials</h1>
       <div className={styles.testimonials}>
-        {testimonials.slice(0, 6).map((testimonial, i) => {
-          return (
-            <div className={styles.testimonial} key={i}>
-              <h3> {testimonial.review}</h3>
-              <div className={styles.name__time}>
-                <span>{testimonial.name}</span>
-                <span>{testimonial.datePosted}</span>
-              </div>
-            </div>
-          );
-        })}
+        <AiFillCaretLeft
+          className={styles.icon}
+          onClick={() => {
+            changeTestimonials("left");
+          }}
+        />
+        <div className={styles.main__container}>
+          {testimonials
+            .slice(index, isMobile ? index + 1 : index + 3)
+            .map((testimonial, i) => {
+              return (
+                <div className={styles.testimonial} key={i}>
+                  <h3> {testimonial.review}</h3>
+                  <div className={styles.name__time}>
+                    <span>{testimonial.name}</span>
+                    <span>{testimonial.datePosted}</span>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        <AiFillCaretRight
+          className={styles.icon}
+          onClick={() => {
+            changeTestimonials("right");
+          }}
+        />
       </div>
       <div className={styles.location_container}>
         <h1>FIND US ON MAP</h1>
