@@ -7,26 +7,19 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="footer">
+      <div className="footer__timings__mobile">
+        <h3>Timings</h3>
+        <ul>
+          <li>
+            <span> Monday to Saturday</span> <span>10:00 AM - 10:00 PM</span>
+          </li>
+          <li>
+            <span>Sunday</span> <span>10:00 AM - 04:00 PM</span>
+          </li>
+        </ul>
+      </div>
       <div className="footer__container">
         <div className="footer__contactus">
-          {/* <h3>Contact us</h3>
-
-          <ul>
-            <li>
-              <span>Address</span>
-              <p>1234 Main Street, Anytown, CA 12345 USA</p>
-            </li>
-            <li>
-              <span>Phone</span>
-              <p>(800) 123-4567</p>
-            </li>
-            <li>
-              <span>Email</span>
-              <p>
-                <a href="mailto:mdobaid311@gmail.com">mdobaid311@gmail.com</a>
-              </p>
-            </li>
-          </ul> */}
           <Link to="/contact">Contact Us</Link>
         </div>
         <div className="footer__followus">
@@ -55,14 +48,18 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        {/* <form className="footer__contact">
-          <h2>Contact us</h2>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email Address" />
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Message"></textarea>
-          <button>Submit</button>
-        </form> */}
+        <div className="footer__timings">
+          <h3>Timings</h3>
+          <ul>
+            {" "}
+            <li>
+              <span> Monday to Saturday</span> <span>10:00 AM - 10:00 PM</span>
+            </li>
+            <li>
+              <span>Sunday</span> <span>10:00 AM - 04:00 PM</span>
+            </li>
+          </ul>
+        </div>
         <div className="footer__logo">
           <img src={logo} alt="" />
         </div>

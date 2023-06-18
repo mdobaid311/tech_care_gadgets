@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./Testimonials.module.scss";
 import testimonials from "./testimonials.json";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import axios from "axios";
 
 const Testimonials = () => {
   const [index, setIndex] = useState(0);
   const [isMobile, setisMobile] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
 
   const changeTestimonials = (direction) => {
     if (direction === "left") {
@@ -22,6 +24,25 @@ const Testimonials = () => {
       }
     }
   };
+
+
+  useEffect(() => {
+    getAllTestimonials();
+  }, []);
+
+  const getAllTestimonials = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_KEY}/api/v1/testimonials`
+      );
+      setTestimonials(res.data.testimonials);
+      console.log(res.data.testimonials);
+       
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
@@ -43,14 +64,14 @@ const Testimonials = () => {
         />
         <div className={styles.main__container}>
           {testimonials
-            .slice(index, isMobile ? index + 1 : index + 3)
-            .map((testimonial, i) => {
+            ?.slice(index, isMobile ? index + 1 : index + 3)
+            ?.map((testimonial, i) => {
               return (
-                <div className={styles.testimonial} key={i}>
-                  <h3> {testimonial.review}</h3>
+                <div className={styles.testimonial} key={testimonial?._id}>
+                  <h3> {testimonial?.review}</h3>
                   <div className={styles.name__time}>
-                    <span>{testimonial.name}</span>
-                    <span>{testimonial.datePosted}</span>
+                    <span>{testimonial?.name}</span>
+                    <span>{testimonial?.date}</span>
                   </div>
                 </div>
               );
