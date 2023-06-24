@@ -23,10 +23,10 @@ const ProductsSection = () => {
       setProducts(prods.data.products);
 
       const allCategories = [
-        ...new Set(prods.data.products.map((product) => product.category)),
+        ...new Set(prods.data.products.map((product) => product.category.toLowerCase())),
       ];
       const allBrands = [
-        ...new Set(prods.data.products.map((product) => product.brand)),
+        ...new Set(prods.data.products.map((product) => product.brand.toLowerCase())),
       ];
       setCategories(allCategories);
       setBrands(allBrands);
