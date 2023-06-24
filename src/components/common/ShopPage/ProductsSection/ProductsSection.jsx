@@ -75,13 +75,13 @@ const ProductsSection = () => {
 
     if (brandFilters.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
-        brandFilters.includes(product.brand)
+        brandFilters.toLowerCase().includes(product.brand)
       );
     }
 
     if (categoryFilters.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
-        categoryFilters.includes(product.category)
+        categoryFilters.toLowerCase().includes(product.category)
       );
     }
 
