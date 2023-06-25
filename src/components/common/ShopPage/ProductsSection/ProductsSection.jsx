@@ -79,18 +79,24 @@ const ProductsSection = () => {
   useEffect(() => {
     let filteredProducts = originalProductsList;
 
-    if (brandFilters.length > 0) {
+    if (brandFilters.length > 0 && categoryFilters.length > 0) {
+      filteredProducts = originalProductsList.filter(
+        (product) =>
+          brandFilters.includes(product.brand.toLowerCase()) ||
+          categoryFilters.includes(product.category.toLowerCase())
+      );
+    } else if (brandFilters.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         brandFilters.includes(product.brand.toLowerCase())
       );
-    }
-
-    if (categoryFilters.length > 0) {
+    } else if (categoryFilters.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         categoryFilters.includes(product.category.toLowerCase())
       );
     }
-
+    console.log(filteredProducts)
+    console.log(categoryFilters)
+    console.log(brandFilters)
     setProducts(filteredProducts);
   }, [brandFilters, categoryFilters, originalProductsList]);
 
@@ -109,10 +115,13 @@ const ProductsSection = () => {
         {brands.map((brand) => (
           <div className="filter__container" key={brand}>
             <label className="container-checkbox">
-            {brand} 
-              <input type="checkbox"  
-               onChange={(e) => handleBrandFilterChange(brand, e.target.checked)}
-              checked={brandFilters.includes(brand)}
+              {brand}
+              <input
+                type="checkbox"
+                onChange={(e) =>
+                  handleBrandFilterChange(brand, e.target.checked)
+                }
+                checked={brandFilters.includes(brand)}
               />
               <span className="checkmark"></span>
             </label>
@@ -128,10 +137,13 @@ const ProductsSection = () => {
         {categories.map((category) => (
           <div className="filter__container" key={category}>
             <label className="container-checkbox">
-            {category} 
-              <input type="checkbox"  
-               onChange={(e) => handleCategoryFilterChange(category, e.target.checked)}
-              checked={categoryFilters.includes(category)}
+              {category}
+              <input
+                type="checkbox"
+                onChange={(e) =>
+                  handleCategoryFilterChange(category, e.target.checked)
+                }
+                checked={categoryFilters.includes(category)}
               />
               <span className="checkmark"></span>
             </label>
