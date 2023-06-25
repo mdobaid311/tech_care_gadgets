@@ -8,37 +8,46 @@ import { useStateContext } from "../../context/stateContext";
 
 const DetailView = () => {
   const { id } = useParams();
-  const {qty, incQty} = useStateContext()
+  const { qty, incQty } = useStateContext();
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
-  const [productQty, setProductQty] = useState(0);
+  const [productQty, setProductQty] = useState(1);
 
   useEffect(() => {
-    getSingleProduct();
-  }, []);
+    const getSingleProduct = async () => {
+      const prod = await axios.get(
+        `${import.meta.env.VITE_API_KEY}/api/v1/products/${id}`
+      );
+      console.log(prod.data.product);
+      setProduct(prod.data.product);
+      setSelectedImage(prod.data.product.images[0]);
+    };
 
-  const getSingleProduct = async () => {
-    const prod = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products/${id}`);
-    console.log(prod.data.product);
-    setProduct(prod.data.product);
-    setSelectedImage(prod.data.product.images[0]);
-  };
+    getSingleProduct();
+  }, [id]);
+
+
 
   const setQuantity = (value) => {
     setProductQty(value);
   };
 
-  const addToCart = async() => {
-    console.log(JSON.parse(localStorage.getItem('user')))
-    const userId  =  JSON.parse(localStorage.getItem('user'))._id
-    const res = await axios.patch(`${import.meta.env.VITE_API_KEY}/api/v1/users/cart`,{
-      productId: id,
-      userId : userId,
-    })
-    incQty()
-    console.log(res.data.message)
-  }
+  const addToCart = async () => {
+    // add to cart number of qty
+
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+    for (let i = 0; i < productQty; i++) {
+      const res = await axios.patch(
+        `${import.meta.env.VITE_API_KEY}/api/v1/users/cart`,
+        {
+          productId: id,
+          userId: userId,
+        }
+      );
+      incQty();
+    }
+  };
 
   return (
     <div className="detail_view__container">
@@ -97,11 +106,13 @@ const DetailView = () => {
           </div>
           <div className="total__price">
             <h3>Total Price</h3>
-            <h3>{product?.price} USD</h3>
+            <h3>${product?.price}</h3>
           </div>
         </div>
         <div className="detail_view__buttons">
-          <button className="cart__button" onClick={addToCart}>Add to cart</button>
+          <button className="cart__button" onClick={addToCart}>
+            Add to cart
+          </button>
           <button className="save__button">
             <AiOutlineHeart className="icon" size={15} />
             Save

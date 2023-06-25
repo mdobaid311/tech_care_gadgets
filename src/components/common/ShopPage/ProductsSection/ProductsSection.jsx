@@ -18,15 +18,21 @@ const ProductsSection = () => {
 
   useEffect(() => {
     const getAllProducts = async () => {
-      const prods = await axios.get(`${import.meta.env.VITE_API_KEY}/api/v1/products`);
+      const prods = await axios.get(
+        `${import.meta.env.VITE_API_KEY}/api/v1/products`
+      );
       setOriginalProductsList(prods.data.products);
       setProducts(prods.data.products);
 
       const allCategories = [
-        ...new Set(prods.data.products.map((product) => product.category.toLowerCase())),
+        ...new Set(
+          prods.data.products.map((product) => product.category.toLowerCase())
+        ),
       ];
       const allBrands = [
-        ...new Set(prods.data.products.map((product) => product.brand.toLowerCase())),
+        ...new Set(
+          prods.data.products.map((product) => product.brand.toLowerCase())
+        ),
       ];
       setCategories(allCategories);
       setBrands(allBrands);
@@ -81,12 +87,12 @@ const ProductsSection = () => {
 
     if (categoryFilters.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
-        categoryFilters.includes(product.category.toLowerCase() )
+        categoryFilters.includes(product.category.toLowerCase())
       );
     }
 
     setProducts(filteredProducts);
-  }, [brandFilters, categoryFilters,originalProductsList]);
+  }, [brandFilters, categoryFilters, originalProductsList]);
 
   useEffect(() => {
     if (showMobileFilter) {
@@ -102,25 +108,41 @@ const ProductsSection = () => {
         <h3>Brand</h3>
         {brands.map((brand) => (
           <div className="filter__container" key={brand}>
-            <input
+            <label className="container-checkbox">
+            {brand} 
+              <input type="checkbox"  
+               onChange={(e) => handleBrandFilterChange(brand, e.target.checked)}
+              checked={brandFilters.includes(brand)}
+              />
+              <span className="checkmark"></span>
+            </label>
+            {/* <input
               type="checkbox"
               checked={brandFilters.includes(brand)}
               onChange={(e) => handleBrandFilterChange(brand, e.target.checked)}
             />
-            <span>{brand}</span>
+            <span>{brand}</span> */}
           </div>
         ))}
         <h3>Category</h3>
         {categories.map((category) => (
           <div className="filter__container" key={category}>
-            <input
+            <label className="container-checkbox">
+            {category} 
+              <input type="checkbox"  
+               onChange={(e) => handleCategoryFilterChange(category, e.target.checked)}
+              checked={categoryFilters.includes(category)}
+              />
+              <span className="checkmark"></span>
+            </label>
+            {/* <input
               type="checkbox"
               checked={categoryFilters.includes(category)}
               onChange={(e) =>
                 handleCategoryFilterChange(category, e.target.checked)
               }
-            />
-            <span>{category}</span>
+            /> */}
+            {/* <span>{category}</span> */}
           </div>
         ))}
       </div>
@@ -139,12 +161,18 @@ const ProductsSection = () => {
           </div>
           <div className="main__filter_container">
             <div className="filter__option">
-              <h3 className={filterOption === "brands" ? "active" : ""} 
-              onClick={() => setfilterOption("brands")}>
-              Brand</h3>
-              <h3 onClick={() => setfilterOption("categories")}
-              className={filterOption === "categories" ? "active" : ""}
-              >Categories</h3>
+              <h3
+                className={filterOption === "brands" ? "active" : ""}
+                onClick={() => setfilterOption("brands")}
+              >
+                Brand
+              </h3>
+              <h3
+                onClick={() => setfilterOption("categories")}
+                className={filterOption === "categories" ? "active" : ""}
+              >
+                Categories
+              </h3>
             </div>
             <div className="filter__options">
               <div className="filter__items">
@@ -184,15 +212,16 @@ const ProductsSection = () => {
                   : null}
               </div>
             </div>
-          
           </div>
-      <div className="show__results">
-        <span 
-        onClick={() => {
-          setShowMobileFilter(false);
-        }}
-        >Show {products.length} results</span>
-      </div>
+          <div className="show__results">
+            <span
+              onClick={() => {
+                setShowMobileFilter(false);
+              }}
+            >
+              Show {products.length} results
+            </span>
+          </div>
         </div>
       )}
 

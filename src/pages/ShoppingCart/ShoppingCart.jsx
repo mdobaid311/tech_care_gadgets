@@ -6,15 +6,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { client } from "../../sanity/client";
 import axios from "axios";
 import { useStateContext } from "../../context/stateContext";
+import { useCallback } from "react";
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const { qty, incQty, decQty } = useStateContext();
-const [cartTotal, setCartTotal] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  const getCartItems = useCallback(async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const prods = await axios.get(
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/${user?._id}`
+    );
+    // if duplicate items, then increase quantity
+    const mappedProds = prods.data.user.cart.reduce((acc, item) => {
+      const existingItem = acc.find((i) => i._id === item._id);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        acc.push({ ...item, quantity: 1 });
+      }
+      return acc;
+    }, []);
+
+    setCartItems(mappedProds);
+    setCartTotal(
+      Math.round(
+        mappedProds.reduce((acc, item) => acc + item?.price * item?.quantity, 0)
+      )
+    );
+    console.log(cartItems);
+  }, []);
 
   useEffect(() => {
     getCartItems();
-  }, []);
+  }, [getCartItems]);
 
   const decreaseQty = async (product) => {
     const res = await axios.patch(
@@ -33,42 +59,22 @@ const [cartTotal, setCartTotal] = useState(0);
         return item;
       })
     );
-    setCartTotal(prev=>{
-      return prev - product.price
+    setCartTotal((prev) => {
+      return prev - product.price;
     });
     decQty();
-  };
-
-  const getCartItems = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const prods = await axios.get(
-      `${import.meta.env.VITE_API_KEY}/api/v1/users/${user?._id}`
-    );
-    // if duplicate items, then increase quantity
-    const mappedProds = prods.data.user.cart.reduce((acc, item) => {
-      const existingItem = acc.find((i) => i._id === item._id);
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        acc.push({ ...item, quantity: 1 });
-      }
-      return acc;
-    }, []);
-
-    setCartItems(mappedProds);
-    setCartTotal(Math.round(
-      mappedProds.reduce((acc, item) => acc + item?.price*item?.quantity, 0)
-    ));
-    console.log(cartItems);
   };
 
   const increaseQuantity = async (product_id) => {
     console.log(JSON.parse(localStorage.getItem("user")));
     const userId = JSON.parse(localStorage.getItem("user"))._id;
-    const res = await axios.patch(`${import.meta.env.VITE_API_KEY}/api/v1/users/cart`, {
-      productId: product_id,
-      userId: userId,
-    });
+    const res = await axios.patch(
+      `${import.meta.env.VITE_API_KEY}/api/v1/users/cart`,
+      {
+        productId: product_id,
+        userId: userId,
+      }
+    );
     incQty();
     setCartItems((prev) =>
       prev.map((item) => {
@@ -79,8 +85,8 @@ const [cartTotal, setCartTotal] = useState(0);
       })
     );
     const product = cartItems.find((item) => item._id === product_id);
-    setCartTotal(prev=>{
-      return prev + product.price
+    setCartTotal((prev) => {
+      return prev + product.price;
     });
   };
 
@@ -92,9 +98,15 @@ const [cartTotal, setCartTotal] = useState(0);
         userId: JSON.parse(localStorage.getItem("user"))._id,
       }
     );
+
+    const countOfProduct = cartItems.find(
+      (item) => item._id === product_id
+    ).quantity;
+    decQty(countOfProduct);
+
     setCartItems((prev) => prev.filter((item) => item._id !== product_id));
     const product = cartItems.find((item) => item._id === product_id);
-    const total = cartTotal - product.price*product.quantity;
+    const total = cartTotal - product.price * product.quantity;
     setCartTotal(total);
   };
 
@@ -171,7 +183,7 @@ const [cartTotal, setCartTotal] = useState(0);
             </div>
             <div className="tax">
               <h4>Tax</h4>
-              <h4>0.00 EUR</h4>
+              <h4>$0.00</h4>
             </div>
             <div className="order_total">
               <h3>Order Total</h3>

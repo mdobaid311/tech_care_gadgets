@@ -87,7 +87,7 @@ const Navbar = () => {
               <BiShoppingBag className="icon" />
               <div>
                 <span>Shopping Cart</span>
-                <span>10 USD</span>
+                <span>$10</span>
               </div>
             </Link>
 

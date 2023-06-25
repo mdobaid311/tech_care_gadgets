@@ -43,7 +43,12 @@ export const StateContext = ({ children }) => {
     setQty((prevQty) => prevQty + 1);
   };
 
-  const decQty = () => {
+  const decQty = (qty) => {
+    if (qty > 1) {
+      setQty((prevQty) => prevQty - qty);
+      return;
+    }
+
     setQty((prevQty) => {
       if (prevQty - 1 < 1) return 1;
       return prevQty - 1;
@@ -92,8 +97,6 @@ export const StateContext = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
-
-
   return (
     <Context.Provider
       value={{
@@ -115,7 +118,7 @@ export const StateContext = ({ children }) => {
         setTotalQuantities,
         setUserDetails,
         setSearchText,
-        setQty
+        setQty,
       }}
     >
       {children}
