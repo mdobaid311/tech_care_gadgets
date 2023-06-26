@@ -137,7 +137,7 @@ const ProductsSection = () => {
         {categories.map((category) => (
           <div className="filter__container" key={category}>
             <label className="container-checkbox">
-              {category}
+              {category.toUpperCase()}
               <input
                 type="checkbox"
                 onChange={(e) =>
