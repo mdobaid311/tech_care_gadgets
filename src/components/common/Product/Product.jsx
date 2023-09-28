@@ -59,7 +59,7 @@ const Product = ({ product }) => {
       <div className="product__details">
         <div className="product__category">{product?.category}</div>
         <div className="product__name"> {product?.name} </div>
-        <div className="product__price"> {product?.price}USD</div>
+        <div className="product__price"> ${product?.price}</div>
       </div>
     </div>
   );
